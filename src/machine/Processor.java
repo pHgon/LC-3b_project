@@ -17,12 +17,13 @@ public class Processor {
         this.registradores = new int[8];
         this.n = 0;
         this.z = 0;
-        this.p = 0;
+        this.p = 0;        
     }
     
-    public int executar(Instrucao instruction, Memory memory){
+    public int executar(Instrucao instruction, Memory memory, int pc){
         int offsetPC = 0;
-        System.out.println("opcode: " + instruction.getOpcode());
+        System.out.println("PC: " + pc);
+        System.out.println("\nopcode: " + instruction.getOpcode());
         switch(instruction.getOpcode()){
             case "0001":
                 offsetPC = this.add(instruction);
@@ -34,8 +35,11 @@ public class Processor {
                 offsetPC = this.br(instruction);
                 break;
             case "1100":
-                offsetPC = this.jmpret(instruction);
+                offsetPC = this.jmpret(instruction, pc);
                 break;
+            case "0100":
+                offsetPC = this.jsrjsrr(instruction, pc);
+                break;                    
         }        
         return offsetPC;
     }
@@ -93,18 +97,34 @@ public class Processor {
         
         return 0;
     }
-    private int jmpret(Instrucao instruction){
+    private int jmpret(Instrucao instruction, int pc){
         Tuple tuple = Break.JMPRET(instruction);
-        
-        if(tuple.t1 == 7){
+        return this.registradores[tuple.t1] - pc;        
+        /*if(tuple.t1 == 7){
             //ret
-            return this.registradores[7];        
+            return this.registradores[7] - pc;        
         }
         else{
             //jmp            
-            return this.registradores[tuple.t1];        
-        }
+            
+        }*/        
+    }
+    private int jsrjsrr(Instrucao instruction, int pc) {
+        Tuple tuple = Break.JSRJSRR(instruction);
+        int bitOp, offset, baseR;
+        bitOp = tuple.t1;
+        offset = tuple.t2;
+        baseR = tuple.t3;
         
+        this.registradores[7] = pc + 1;
+        if(bitOp == 1){
+            //jsr
+            return ((offset << 1) + 1);
+        }
+        else{
+            //jsrr
+            return this.registradores[baseR] - pc;
+        }        
     }
     @Override
     public String toString(){
@@ -118,4 +138,6 @@ public class Processor {
                 this.registradores[6] + " " +
                 this.registradores[7] + " ";
     }    
+
+  
 }
