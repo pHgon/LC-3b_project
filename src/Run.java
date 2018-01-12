@@ -11,7 +11,7 @@ public class Run {
      */
    public static void main(String[] args)
     {
-        String arquivo = "programa.bin";
+        String arquivo = "program.bin";
         int offset = 500; // definido pelo carregador
         ProgramList lista = new ProgramList(offset);
         lista.geraPrograma(arquivo);
