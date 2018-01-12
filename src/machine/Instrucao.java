@@ -6,9 +6,9 @@ package machine;
  */
 public class Instrucao {
     
-    public String opcode;
-    public String bits12;
-    public int endereco;
+    private String opcode;
+    private String bits12;
+    private int endereco;
     
     Instrucao(String opcode, String bits12, int endereco)
     {

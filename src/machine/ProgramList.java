@@ -11,8 +11,8 @@ import java.util.ArrayList;
  */
 public class ProgramList {
     
-    public ArrayList <Instrucao> programa;
-    public int offset;
+    private ArrayList <Instrucao> programa;
+    private int offset;
     
     public ProgramList (int offset) 
     {
@@ -32,8 +32,8 @@ public class ProgramList {
             {                
                 if(i != 0)
                 {
-                    opcode = linha.substring(0, 3);
-                    bits12 = linha.substring(4,15);
+                    opcode = linha.substring(0, 4);
+                    bits12 = linha.substring(4,16);
                     Instrucao atual = new Instrucao(opcode,bits12,offset+i);
                     programa.add(atual);
                     i+=1;                    
