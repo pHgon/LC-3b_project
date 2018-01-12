@@ -33,36 +33,14 @@ public class Processor {
             case "0000":
                 offsetPC = this.br(instruction);
                 break;
+            case "1100":
+                offsetPC = this.jmpret(instruction);
+                break;
         }        
         return offsetPC;
     }
-    private Tuple breakAddAnd(Instrucao instruction){        
-        String bits12 = instruction.getBits12();
-        int dr = Integer.parseInt(bits12.substring(0, 3), 2) -1;
-        int sr1 = Integer.parseInt(bits12.substring(3, 6), 2) -1;
-        int bitOp = Integer.parseInt(bits12.substring(6, 7), 2);
-        int sr2 = 0;
-        int dir = 0;
-        if(bitOp == 0){
-            //add normal
-            sr2 = Integer.parseInt(bits12.substring(9, 12), 2) -1;
-            System.out.println("SR2: " + (sr2 + 1));            
-        }
-        else{
-            //addi
-            dir = Integer.parseInt(bits12.substring(7, 12), 2);
-            System.out.println("Dir: " + dir);            
-        }
-        
-        System.out.println("DR: " + (dr + 1));
-        System.out.println("SR1: " + (sr1 + 1));
-        System.out.println("bitOp: " + bitOp);
-        System.out.println("\n");
-        
-        return new Tuple(dr, sr1, bitOp, sr2, dir);
-    }
     private int add(Instrucao instruction){
-        Tuple tuple = breakAddAnd(instruction);
+        Tuple tuple = Break.AddAnd(instruction);
         int dr, sr1, bitOp, sr2, dir;
         dr = tuple.t1;
         sr1 = tuple.t2;
@@ -82,7 +60,7 @@ public class Processor {
         return 1;
     }
     private int and(Instrucao instruction){
-        Tuple tuple = breakAddAnd(instruction);
+        Tuple tuple = Break.AddAnd(instruction);
         int dr, sr1, bitOp, sr2, dir;
         dr = tuple.t1;
         sr1 = tuple.t2;
@@ -100,24 +78,8 @@ public class Processor {
         }             
         return 1;
     }
-    private Tuple breakBR(Instrucao instruction){
-        String bits12 = instruction.getBits12();
-        int _n, _z, _p, offset;
-        _n = Integer.parseInt(bits12.substring(0, 1), 2);
-        _z = Integer.parseInt(bits12.substring(1, 2), 2);
-        _p = Integer.parseInt(bits12.substring(3, 4), 2);
-        offset = Integer.parseInt(bits12.substring(4, 12), 2);
-                
-        System.out.println("n: " + (_n));
-        System.out.println("z: " + (_z));
-        System.out.println("p: " + (_p));
-        System.out.println("offset: " + (offset));
-        System.out.println("\n");
-        
-        return new Tuple(_n, _z, _p, offset, 0);
-    }
     private int br(Instrucao instruction){
-        Tuple tuple = breakBR(instruction);
+        Tuple tuple = Break.BR(instruction);
         int _n, _z, _p, offset;
         _n = tuple.t1;
         _z = tuple.t2;
@@ -130,6 +92,19 @@ public class Processor {
         }       
         
         return 0;
+    }
+    private int jmpret(Instrucao instruction){
+        Tuple tuple = Break.JMPRET(instruction);
+        
+        if(tuple.t1 == 7){
+            //ret
+            return this.registradores[7];        
+        }
+        else{
+            //jmp            
+            return this.registradores[tuple.t1];        
+        }
+        
     }
     @Override
     public String toString(){

@@ -21,8 +21,9 @@ public class Run {
         /*proc.executar(lista.getInstrucao(offset+1), null); //add
         proc.executar(lista.getInstrucao(offset+2), null); //addi
         proc.executar(lista.getInstrucao(offset+3), null); //and
-        proc.executar(lista.getInstrucao(offset+4), null); //andi*/
-        proc.executar(lista.getInstrucao(offset+5), null); //br
+        proc.executar(lista.getInstrucao(offset+4), null); //andi
+        proc.executar(lista.getInstrucao(offset+5), null); //br*/
+        proc.executar(lista.getInstrucao(offset+6), null); //jmp
         
         System.out.println(proc);
    }
