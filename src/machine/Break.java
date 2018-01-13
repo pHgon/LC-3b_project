@@ -73,4 +73,15 @@ public final class Break {
         }
         return new Tuple(bitOp, offset, baseR, 0, 0);
     }
+    public static Tuple NOT(Instrucao instruction) {
+        String bits12 = instruction.getBits12();
+        int dr, sr;
+        dr = Integer.parseInt(bits12.substring(0, 3), 2);        
+        sr = Integer.parseInt(bits12.substring(3, 6), 2);        
+        
+        System.out.println("dr: " + dr);        
+        System.out.println("sr: " + sr);        
+        
+        return new Tuple(dr, sr, 0, 0, 0);
+    }
 }

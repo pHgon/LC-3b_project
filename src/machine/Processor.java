@@ -40,6 +40,9 @@ public class Processor {
             case "0100":
                 offsetPC = this.jsrjsrr(instruction, pc);
                 break;                    
+            case "1001":
+                offsetPC = this.not(instruction, pc);
+                break;                    
         }        
         return offsetPC;
     }
@@ -125,6 +128,37 @@ public class Processor {
             //jsrr
             return this.registradores[baseR] - pc;
         }        
+    }
+    private int not(Instrucao instruction, int pc){
+        Tuple tuple = Break.NOT(instruction);
+        int dr, sr, sign, number;
+        dr = tuple.t1;
+        sr = tuple.t2;        
+        
+        
+        number = ~Integer.parseInt(Integer.toBinaryString(this.registradores[sr]), 2);        
+        sign = Integer.parseInt(Integer.toBinaryString(number).substring(0,1));
+        System.out.println("Sign: " +  sign);
+        System.out.println("Not Number: " +  number);
+
+        this.registradores[dr] = number;
+        this.n = 0;
+        this.z = 0;
+        this.p = 0;
+        
+        if(sign == 1){
+            this.n = 1;
+        }
+        else{
+            if(number == 0){
+                this.z = 1;
+            }
+            else{
+                this.p = 1;
+            }
+        }        
+        
+        return 1;
     }
     @Override
     public String toString(){
