@@ -1,0 +1,40 @@
+.ORIG x3000
+; this program takes two positive integers x and y, and outputs x - y, and x * y.
+LD R0, X
+LD R1, Y
+
+JSR SUB
+JSR MULT
+JSR END
+
+
+
+SUB          
+NOT R3, R1
+ADD R3, R3, #1
+ADD R3, R0, R3
+ST R3, XY
+RET
+
+MULT
+AND R5, R5, #0
+AND R6, R6, #0
+ADD R5, R5, R0
+ADD R5, R5, #-1
+LOOP
+ADD R6, R6, R1
+ADD R5, R5, #-1
+BRzp LOOP
+ST R6, MUL
+RET
+
+
+END
+HALT
+
+X .FILL 10
+Y .FILL 8
+XY .FILL 0
+MUL .FILL 0
+
+.END
