@@ -5,6 +5,7 @@ import machine.*;
  * @author mateu
  */
 public class Run {
+    private static final class c extends Constants{} // Classe com as constantes
 
     /**
      * @param args the command line arguments
@@ -33,5 +34,7 @@ public class Run {
         pc += proc.executar(lista.getInstrucao(offset+11), null, pc); //not
         System.out.println("PC: " + pc);
         System.out.println(proc);
+
+        Memory mem = new Memory(c.MEM_SIZE);
    }
 }
