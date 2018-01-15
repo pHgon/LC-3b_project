@@ -67,20 +67,8 @@ public class Processor {
         this.registradores[dr] = result;
 
         sign = Integer.parseInt(Integer.toBinaryString(result).substring(0,1));
-        this.n = 0;
-        this.z = 0;
-        this.p = 0;        
-        if(sign == 1){
-            this.n = 1;
-        }
-        else{
-            if(result == 0){
-                this.z = 1;
-            }
-            else{
-                this.p = 1;
-            }
-        }        
+               
+        this.setNZP(sign, result);
         
         return 1;
     }
@@ -161,10 +149,15 @@ public class Processor {
         System.out.println("Not Number: " +  number);
 
         this.registradores[dr] = (short) number;
+                       
+        this.setNZP(sign, (short) number);
         
+        return 1;
+    }
+    private void setNZP(int sign, short number){
         this.n = 0;
         this.z = 0;
-        this.p = 0;        
+        this.p = 0; 
         
         if(sign == 1){
             this.n = 1;
@@ -176,9 +169,7 @@ public class Processor {
             else{
                 this.p = 1;
             }
-        }        
-        
-        return 1;
+        }     
     }
     @Override
     public String toString(){
