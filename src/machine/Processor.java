@@ -10,11 +10,11 @@ package machine;
  * @author lorenzo
  */
 public class Processor {
-    int[] registradores;
+    short[] registradores;
     int n, z, p;
     
     public Processor(){
-        this.registradores = new int[8];
+        this.registradores = new short[8];
         this.n = 0;
         this.z = 0;
         this.p = 0;        
@@ -48,40 +48,59 @@ public class Processor {
     }
     private int add(Instrucao instruction){
         Tuple tuple = Break.AddAnd(instruction);
-        int dr, sr1, bitOp, sr2, dir;
+        int dr, sr1, bitOp, sr2, sign;
+        short dir, result;
         dr = tuple.t1;
         sr1 = tuple.t2;
         bitOp = tuple.t3;
         sr2 = tuple.t4;
-        dir = tuple.t5;
+        dir = (short)tuple.t5;
         
         if(bitOp == 0){
             //add normal
-            this.registradores[dr] = this.registradores[sr1] + this.registradores[sr2];
+            result = (short) (this.registradores[sr1] + this.registradores[sr2]);
         }
         else{
             //addi            
-            this.registradores[dr] = this.registradores[sr1] + dir;
+            result = (short) (this.registradores[sr1] + dir);
         }     
-                                       
+        this.registradores[dr] = result;
+
+        sign = Integer.parseInt(Integer.toBinaryString(result).substring(0,1));
+        this.n = 0;
+        this.z = 0;
+        this.p = 0;        
+        if(sign == 1){
+            this.n = 1;
+        }
+        else{
+            if(result == 0){
+                this.z = 1;
+            }
+            else{
+                this.p = 1;
+            }
+        }        
+        
         return 1;
     }
     private int and(Instrucao instruction){
         Tuple tuple = Break.AddAnd(instruction);
-        int dr, sr1, bitOp, sr2, dir;
+        int dr, sr1, bitOp, sr2;
+        short dir;
         dr = tuple.t1;
         sr1 = tuple.t2;
         bitOp = tuple.t3;
         sr2 = tuple.t4;
-        dir = tuple.t5;
+        dir = (short) tuple.t5;
         
         if(bitOp == 0){
             //and normal
-            this.registradores[dr] = this.registradores[sr1] & this.registradores[sr2]; 
+            this.registradores[dr] = (short) (this.registradores[sr1] & this.registradores[sr2]); 
         }
         else{
             //andi            
-            this.registradores[dr] = this.registradores[sr1] &  dir; 
+            this.registradores[dr] = (short) (this.registradores[sr1] &  dir); 
         }             
         return 1;
     }
@@ -119,7 +138,7 @@ public class Processor {
         offset = tuple.t2;
         baseR = tuple.t3;
         
-        this.registradores[7] = pc + 1;
+        this.registradores[7] = (short) (pc + 1);
         if(bitOp == 1){
             //jsr
             return ((offset << 1) + 1);
@@ -141,10 +160,11 @@ public class Processor {
         System.out.println("Sign: " +  sign);
         System.out.println("Not Number: " +  number);
 
-        this.registradores[dr] = number;
+        this.registradores[dr] = (short) number;
+        
         this.n = 0;
         this.z = 0;
-        this.p = 0;
+        this.p = 0;        
         
         if(sign == 1){
             this.n = 1;
