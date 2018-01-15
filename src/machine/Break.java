@@ -84,4 +84,68 @@ public final class Break {
         
         return new Tuple(dr, sr, 0, 0, 0);
     }
+
+    static Tuple LDBLDILDR(Instrucao instruction) {
+        String bits12 = instruction.getBits12();
+        int dr, baseR;
+        short offset;
+        dr = Integer.parseInt(bits12.substring(0, 3), 2);        
+        baseR = Integer.parseInt(bits12.substring(3, 6), 2);        
+        offset = (short) Integer.parseInt(bits12.substring(6, 12), 2);                
+        
+        System.out.println("dr: " + dr);        
+        System.out.println("baseR: " + baseR);        
+        System.out.println("offset: " + offset);                
+        
+        return new Tuple(dr, baseR, offset, 0, 0);
+    }
+    static Tuple LEA(Instrucao instruction) {
+        String bits12 = instruction.getBits12();
+        int dr;
+        short offset;
+        dr = Integer.parseInt(bits12.substring(0, 3), 2);                
+        offset = (short) Integer.parseInt(bits12.substring(3, 12), 2);               
+        
+        System.out.println("dr: " + dr);                
+        System.out.println("offset: " + offset);                
+        
+        return new Tuple(dr, offset, 0, 0, 0);
+    }
+    static Tuple SHF(Instrucao instruction) {
+        String bits12 = instruction.getBits12();
+        int dr, sr, a, d;
+        short offset;
+        
+        dr = Integer.parseInt(bits12.substring(0, 3), 2);                
+        sr = Integer.parseInt(bits12.substring(3, 6), 2);                
+        a = Integer.parseInt(bits12.substring(6, 7), 2);                
+        d = Integer.parseInt(bits12.substring(7, 8), 2);                
+        offset = (short) Integer.parseInt(bits12.substring(8, 12), 2);                        
+        
+        System.out.println("dr: " + dr);                
+        System.out.println("sr: " + sr);                
+        System.out.println("a: " + a);                
+        System.out.println("d: " + d);                
+        System.out.println("offset: " + offset);                
+        
+        return new Tuple(dr, sr, a, d, offset);
+    }
+
+    static Tuple STBSTISTR(Instrucao instruction) {
+        String bits12 = instruction.getBits12();
+        
+        int sr, baseR;
+        short offset;
+        
+        sr = Integer.parseInt(bits12.substring(0, 3), 2);                
+        baseR = Integer.parseInt(bits12.substring(3, 6), 2);                        
+        offset = (short) Integer.parseInt(bits12.substring(6, 12), 2);                        
+        
+        System.out.println("sr: " + sr);                
+        System.out.println("baseR: " + baseR);                                       
+        System.out.println("offset: " + offset);                
+        
+        return new Tuple(sr, baseR, offset, 0, 0);
+    }
+    
 }

@@ -10,17 +10,17 @@ package machine;
  * @author lorenzo
  */
 public class Processor {
-    int[] registradores;
+    short[] registradores;
     int n, z, p;
     
     public Processor(){
-        this.registradores = new int[8];
+        this.registradores = new short[8];
         this.n = 0;
         this.z = 0;
         this.p = 0;        
     }
     
-    public int executar(Instrucao instruction, Memory memory, int pc){
+    public int executar(Instrucao instruction, Memory mem, int pc){
         int offsetPC = 0;
         System.out.println("PC: " + pc);
         System.out.println("\nopcode: " + instruction.getOpcode());
@@ -42,46 +42,75 @@ public class Processor {
                 break;                    
             case "1001":
                 offsetPC = this.not(instruction, pc);
-                break;                    
+                break;            
+            case "0010":
+                offsetPC = this.ldb(instruction, pc, mem);
+                break;      
+            case "1010":
+                offsetPC = this.ldi(instruction, pc, mem);
+                break;  
+            case "0110":
+                offsetPC = this.ldr(instruction, pc, mem);
+                break;  
+            case "1110":
+                offsetPC = this.lea(instruction, pc, mem);
+                break;              
+            case "1101":
+                offsetPC = this.shf(instruction, pc, mem);
+                break; 
+            case "0011":
+                offsetPC = this.stb(instruction, pc, mem);
+                break; 
+            case "1011":
+                offsetPC = this.sti(instruction, pc, mem);
+                break;                 
+            case "0111":
+                offsetPC = this.str(instruction, pc, mem);
+                break;           
         }        
         return offsetPC;
     }
     private int add(Instrucao instruction){
         Tuple tuple = Break.AddAnd(instruction);
-        int dr, sr1, bitOp, sr2, dir;
+        int dr, sr1, bitOp, sr2;
+        short dir, result;
         dr = tuple.t1;
         sr1 = tuple.t2;
         bitOp = tuple.t3;
         sr2 = tuple.t4;
-        dir = tuple.t5;
+        dir = (short)tuple.t5;
         
         if(bitOp == 0){
             //add normal
-            this.registradores[dr] = this.registradores[sr1] + this.registradores[sr2];
+            result = (short) (this.registradores[sr1] + this.registradores[sr2]);
         }
         else{
             //addi            
-            this.registradores[dr] = this.registradores[sr1] + dir;
+            result = (short) (this.registradores[sr1] + dir);
         }     
-                                       
+        this.registradores[dr] = result;
+                       
+        this.setNZP(result);
+        
         return 1;
     }
     private int and(Instrucao instruction){
         Tuple tuple = Break.AddAnd(instruction);
-        int dr, sr1, bitOp, sr2, dir;
+        int dr, sr1, bitOp, sr2;
+        short dir;
         dr = tuple.t1;
         sr1 = tuple.t2;
         bitOp = tuple.t3;
         sr2 = tuple.t4;
-        dir = tuple.t5;
+        dir = (short) tuple.t5;
         
         if(bitOp == 0){
             //and normal
-            this.registradores[dr] = this.registradores[sr1] & this.registradores[sr2]; 
+            this.registradores[dr] = (short) (this.registradores[sr1] & this.registradores[sr2]); 
         }
         else{
             //andi            
-            this.registradores[dr] = this.registradores[sr1] &  dir; 
+            this.registradores[dr] = (short) (this.registradores[sr1] &  dir); 
         }             
         return 1;
     }
@@ -119,7 +148,7 @@ public class Processor {
         offset = tuple.t2;
         baseR = tuple.t3;
         
-        this.registradores[7] = pc + 1;
+        this.registradores[7] = (short) (pc + 1);
         if(bitOp == 1){
             //jsr
             return ((offset << 1) + 1);
@@ -131,20 +160,167 @@ public class Processor {
     }
     private int not(Instrucao instruction, int pc){
         Tuple tuple = Break.NOT(instruction);
-        int dr, sr, sign, number;
+        int dr, sr, number;
         dr = tuple.t1;
         sr = tuple.t2;        
         
         
-        number = ~Integer.parseInt(Integer.toBinaryString(this.registradores[sr]), 2);        
-        sign = Integer.parseInt(Integer.toBinaryString(number).substring(0,1));
-        System.out.println("Sign: " +  sign);
+        number = ~Integer.parseInt(Integer.toBinaryString(this.registradores[sr]), 2);                    
         System.out.println("Not Number: " +  number);
 
-        this.registradores[dr] = number;
+        this.registradores[dr] = (short) number;
+                       
+        this.setNZP((short) number);
+        
+        return 1;
+    }
+    private int ldb(Instrucao instruction, int pc, Memory mem) {
+        Tuple tuple = Break.LDBLDILDR(instruction);
+        int dr, baseR;
+        short offset;
+        dr = tuple.t1;
+        baseR = tuple.t2;
+        offset = (short)tuple.t3;
+        
+        this.registradores[dr] = (short) mem.getMemory((this.registradores[baseR] + offset));
+        this.setNZP(this.registradores[dr]);
+        
+        return 1;
+    }
+    private int ldi(Instrucao instruction, int pc, Memory mem) {
+        Tuple tuple = Break.LDBLDILDR(instruction);
+        int dr, baseR;
+        short offset, address;
+        dr = tuple.t1;
+        baseR = tuple.t2;
+        offset = (short)(tuple.t3 << 1);
+        address = (short) (this.registradores[baseR] + (short) offset);        
+
+        address = this.setZeroLast(address);
+
+        
+        this.registradores[dr] = (short)mem.getMemory(mem.getMemory(address));        
+        
+        this.setNZP(this.registradores[dr]);
+        
+        return 1;
+    }
+    private int ldr(Instrucao instruction, int pc, Memory mem) {
+        Tuple tuple = Break.LDBLDILDR(instruction);
+        int dr, baseR;
+        short offset, address;
+        dr = tuple.t1;
+        baseR = tuple.t2;
+        offset = (short)(tuple.t3 << 1);
+        address = (short) (this.registradores[baseR] + (short) offset);        
+
+        address = this.setZeroLast(address);
+        
+        this.registradores[dr] = (short)mem.getMemory(mem.getMemory(address));        
+        
+        this.setNZP(this.registradores[dr]);
+        
+        return 1;
+    }
+    private int lea(Instrucao instruction, int pc, Memory mem) {
+        Tuple tuple = Break.LEA(instruction);
+        
+        int dr;
+        short offset;
+        dr = tuple.t1;
+        offset = (short) ((tuple.t2 << 1) + pc + 1);
+        
+        this.registradores[dr] = (short)(mem.getMemory(offset));
+        this.setNZP(this.registradores[dr]);
+        
+        return 1;
+    }   
+    private int shf(Instrucao instruction, int pc, Memory mem) {
+        Tuple tuple = Break.SHF (instruction);
+        int dr, sr, a, d;
+        short offset, result;
+        
+        dr = tuple.t1;
+        sr = tuple.t2;
+        a = tuple.t3;
+        d = tuple.t4;
+        offset = (short) tuple.t5;
+        result = 0;
+        if(d == 0){
+            result = (short)(this.registradores[sr] << offset);
+        }
+        else{
+            if(a == 0){
+                result = (short)(this.registradores[sr] >>> offset);
+            }
+            else{
+                result = (short)(this.registradores[sr] >> offset);               
+            }
+        }
+    
+        this.registradores[dr] = result;
+        this.setNZP(result);
+        return 1;
+    }
+    private int stb(Instrucao instruction, int pc, Memory mem) {
+        Tuple tuple = Break.STBSTISTR(instruction);
+        int sr, baseR;
+        short offset;
+        sr = tuple.t1;
+        baseR = tuple.t2;
+        offset = (short) tuple.t3;
+        
+        offset = (short) (this.registradores[baseR] + offset);
+        
+        mem.setMemory(offset, this.registradores[sr]);
+        System.out.println("Pos:" + offset + " Value:" + mem.getMemory(offset));
+        return 1;
+    }
+    private int sti(Instrucao instruction, int pc, Memory mem) {
+        Tuple tuple = Break.STBSTISTR(instruction);
+        int sr, baseR;
+        short offset;
+        sr = tuple.t1;
+        baseR = tuple.t2;
+        offset = (short) (tuple.t3 << 1);
+        
+        offset = (short) (this.registradores[baseR] + offset);
+        offset = this.setZeroLast(offset);
+        
+        mem.setMemory(mem.getMemory(offset), this.registradores[sr]);
+        System.out.println("Pos:" + mem.getMemory(offset) + " Value:" + mem.getMemory(mem.getMemory(offset)));
+        return 1;
+    }
+
+    private int str(Instrucao instruction, int pc, Memory mem) {
+        Tuple tuple = Break.STBSTISTR(instruction);
+        int sr, baseR;
+        short offset;
+        sr = tuple.t1;
+        baseR = tuple.t2;
+        offset = (short) tuple.t3;
+        
+        offset = (short) (this.registradores[baseR] + (offset << 1));
+        offset = this.setZeroLast(offset);
+
+        mem.setMemory(offset, this.registradores[sr]);
+        System.out.println("Pos:" + offset + " Value:" + mem.getMemory(offset));
+        return 1;
+    }
+    private short setZeroLast(int number){
+        //set 0 na primeira posicao????????????
+        String leAddress = Integer.toBinaryString(number);                       
+        char[] myNameChars = leAddress.toCharArray();
+        myNameChars[leAddress.length()-1] = '0';
+        leAddress = String.valueOf(myNameChars);
+        
+        return (short) Integer.parseInt(leAddress,2);
+    }
+    private void setNZP(short number){
+        int sign = Integer.parseInt(Integer.toBinaryString(number).substring(0,1));
         this.n = 0;
         this.z = 0;
-        this.p = 0;
+        this.p = 0; 
         
         if(sign == 1){
             this.n = 1;
@@ -156,9 +332,7 @@ public class Processor {
             else{
                 this.p = 1;
             }
-        }        
-        
-        return 1;
+        }     
     }
     @Override
     public String toString(){
@@ -171,7 +345,5 @@ public class Processor {
                 this.registradores[5] + " " +
                 this.registradores[6] + " " +
                 this.registradores[7] + " ";
-    }    
-
-  
+    }         
 }
