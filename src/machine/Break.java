@@ -130,4 +130,22 @@ public final class Break {
         
         return new Tuple(dr, sr, a, d, offset);
     }
+
+    static Tuple STBSTISTR(Instrucao instruction) {
+        String bits12 = instruction.getBits12();
+        
+        int sr, baseR;
+        short offset;
+        
+        sr = Integer.parseInt(bits12.substring(0, 3), 2);                
+        baseR = Integer.parseInt(bits12.substring(3, 6), 2);                        
+        offset = (short) Integer.parseInt(bits12.substring(6, 12), 2);                        
+        
+        System.out.println("sr: " + sr);                
+        System.out.println("baseR: " + baseR);                                       
+        System.out.println("offset: " + offset);                
+        
+        return new Tuple(sr, baseR, offset, 0, 0);
+    }
+    
 }

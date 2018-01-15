@@ -58,7 +58,7 @@ public class Processor {
             case "1101":
                 offsetPC = this.shf(instruction, pc, mem);
                 break; 
-            /*case "0011":
+            case "0011":
                 offsetPC = this.stb(instruction, pc, mem);
                 break; 
             case "1011":
@@ -66,7 +66,7 @@ public class Processor {
                 break;                 
             case "0111":
                 offsetPC = this.str(instruction, pc, mem);
-                break;           */                
+                break;           
         }        
         return offsetPC;
     }
@@ -195,14 +195,9 @@ public class Processor {
         baseR = tuple.t2;
         offset = (short)(tuple.t3 << 1);
         address = (short) (this.registradores[baseR] + (short) offset);        
-        String leAddress = Integer.toBinaryString(address);
-        
-        //set 0 na primeira posicao????????????
-        char[] myNameChars = leAddress.toCharArray();
-        myNameChars[0] = '0';
-        leAddress = String.valueOf(myNameChars);
-                
-        address = (short) Integer.parseInt(leAddress,2);
+
+        address = this.setZeroLast(address);
+
         
         this.registradores[dr] = (short)mem.getMemory(mem.getMemory(address));        
         
@@ -218,14 +213,8 @@ public class Processor {
         baseR = tuple.t2;
         offset = (short)(tuple.t3 << 1);
         address = (short) (this.registradores[baseR] + (short) offset);        
-        String leAddress = Integer.toBinaryString(address);
-        
-        //set 0 na primeira posicao????????????
-        char[] myNameChars = leAddress.toCharArray();
-        myNameChars[0] = '0';
-        leAddress = String.valueOf(myNameChars);
-                
-        address = (short) Integer.parseInt(leAddress,2);
+
+        address = this.setZeroLast(address);
         
         this.registradores[dr] = (short)mem.getMemory(mem.getMemory(address));        
         
@@ -273,17 +262,59 @@ public class Processor {
         this.setNZP(result);
         return 1;
     }
-
     private int stb(Instrucao instruction, int pc, Memory mem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Tuple tuple = Break.STBSTISTR(instruction);
+        int sr, baseR;
+        short offset;
+        sr = tuple.t1;
+        baseR = tuple.t2;
+        offset = (short) tuple.t3;
+        
+        offset = (short) (this.registradores[baseR] + offset);
+        
+        mem.setMemory(offset, this.registradores[sr]);
+        System.out.println("Pos:" + offset + " Value:" + mem.getMemory(offset));
+        return 1;
     }
-
     private int sti(Instrucao instruction, int pc, Memory mem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Tuple tuple = Break.STBSTISTR(instruction);
+        int sr, baseR;
+        short offset;
+        sr = tuple.t1;
+        baseR = tuple.t2;
+        offset = (short) (tuple.t3 << 1);
+        
+        offset = (short) (this.registradores[baseR] + offset);
+        offset = this.setZeroLast(offset);
+        
+        mem.setMemory(mem.getMemory(offset), this.registradores[sr]);
+        System.out.println("Pos:" + mem.getMemory(offset) + " Value:" + mem.getMemory(mem.getMemory(offset)));
+        return 1;
     }
 
     private int str(Instrucao instruction, int pc, Memory mem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Tuple tuple = Break.STBSTISTR(instruction);
+        int sr, baseR;
+        short offset;
+        sr = tuple.t1;
+        baseR = tuple.t2;
+        offset = (short) tuple.t3;
+        
+        offset = (short) (this.registradores[baseR] + (offset << 1));
+        offset = this.setZeroLast(offset);
+
+        mem.setMemory(offset, this.registradores[sr]);
+        System.out.println("Pos:" + offset + " Value:" + mem.getMemory(offset));
+        return 1;
+    }
+    private short setZeroLast(int number){
+        //set 0 na primeira posicao????????????
+        String leAddress = Integer.toBinaryString(number);                       
+        char[] myNameChars = leAddress.toCharArray();
+        myNameChars[leAddress.length()-1] = '0';
+        leAddress = String.valueOf(myNameChars);
+        
+        return (short) Integer.parseInt(leAddress,2);
     }
     private void setNZP(short number){
         int sign = Integer.parseInt(Integer.toBinaryString(number).substring(0,1));
