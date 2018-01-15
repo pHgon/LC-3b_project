@@ -54,14 +54,11 @@ public class Processor {
                 break;  
             case "1110":
                 offsetPC = this.lea(instruction, pc, mem);
-                break;  
-            /*case "1000":
-                offsetPC = this.rti(instruction, pc, mem);
-                break; 
+                break;              
             case "1101":
                 offsetPC = this.shf(instruction, pc, mem);
                 break; 
-            case "0011":
+            /*case "0011":
                 offsetPC = this.stb(instruction, pc, mem);
                 break; 
             case "1011":
@@ -190,7 +187,6 @@ public class Processor {
         
         return 1;
     }
-
     private int ldi(Instrucao instruction, int pc, Memory mem) {
         Tuple tuple = Break.LDBLDILDR(instruction);
         int dr, baseR;
@@ -214,7 +210,6 @@ public class Processor {
         
         return 1;
     }
-
     private int ldr(Instrucao instruction, int pc, Memory mem) {
         Tuple tuple = Break.LDBLDILDR(instruction);
         int dr, baseR;
@@ -238,7 +233,6 @@ public class Processor {
         
         return 1;
     }
-
     private int lea(Instrucao instruction, int pc, Memory mem) {
         Tuple tuple = Break.LEA(instruction);
         
@@ -251,14 +245,33 @@ public class Processor {
         this.setNZP(this.registradores[dr]);
         
         return 1;
-    }
-
-    private int rti(Instrucao instruction, int pc, Memory mem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    }   
     private int shf(Instrucao instruction, int pc, Memory mem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Tuple tuple = Break.SHF (instruction);
+        int dr, sr, a, d;
+        short offset, result;
+        
+        dr = tuple.t1;
+        sr = tuple.t2;
+        a = tuple.t3;
+        d = tuple.t4;
+        offset = (short) tuple.t5;
+        result = 0;
+        if(d == 0){
+            result = (short)(this.registradores[sr] << offset);
+        }
+        else{
+            if(a == 0){
+                result = (short)(this.registradores[sr] >>> offset);
+            }
+            else{
+                result = (short)(this.registradores[sr] >> offset);               
+            }
+        }
+    
+        this.registradores[dr] = result;
+        this.setNZP(result);
+        return 1;
     }
 
     private int stb(Instrucao instruction, int pc, Memory mem) {

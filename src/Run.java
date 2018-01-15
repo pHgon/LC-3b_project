@@ -38,6 +38,7 @@ public class Run {
         pc += proc.executar(lista.getInstrucao(offset+13), mem, pc); //ldi load word indirect
         pc += proc.executar(lista.getInstrucao(offset+14), mem, pc); //ldr load word
         pc += proc.executar(lista.getInstrucao(offset+15), mem, pc); //lea load effective address
+        pc += proc.executar(lista.getInstrucao(offset+16), mem, pc); //shf
         System.out.println("PC: " + pc);
         System.out.println(proc);
 
