@@ -84,4 +84,31 @@ public final class Break {
         
         return new Tuple(dr, sr, 0, 0, 0);
     }
+
+    static Tuple LDBLDILDR(Instrucao instruction) {
+        String bits12 = instruction.getBits12();
+        int dr, baseR;
+        short offset;
+        dr = Integer.parseInt(bits12.substring(0, 3), 2);        
+        baseR = Integer.parseInt(bits12.substring(3, 6), 2);        
+        offset = (short) Integer.parseInt(bits12.substring(6, 12), 2);                
+        
+        System.out.println("dr: " + dr);        
+        System.out.println("baseR: " + baseR);        
+        System.out.println("offset: " + offset);                
+        
+        return new Tuple(dr, baseR, offset, 0, 0);
+    }
+    static Tuple LEA(Instrucao instruction) {
+        String bits12 = instruction.getBits12();
+        int dr;
+        short offset;
+        dr = Integer.parseInt(bits12.substring(0, 3), 2);                
+        offset = (short) Integer.parseInt(bits12.substring(3, 12), 2);               
+        
+        System.out.println("dr: " + dr);                
+        System.out.println("offset: " + offset);                
+        
+        return new Tuple(dr, offset, 0, 0, 0);
+    }
 }
