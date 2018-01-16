@@ -46,6 +46,7 @@ public class ProgramList {
             }
         }catch(IOException ioe)
         {
+            System.out.println("\n\n ERRO AO ABRIR ARQUIVO ");
         }
     }
     

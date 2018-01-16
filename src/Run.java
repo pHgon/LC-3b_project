@@ -12,7 +12,7 @@ public class Run {
      */
    public static void main(String[] args)
     {
-        String arquivo = "program.bin";
+        String arquivo = "C:\\Users\\mateu\\Desktop\\LC-3b_project\\program.bin";
         int offset = 500, pc; // definido pelo carregador
         ProgramList lista = new ProgramList(offset);
         lista.geraPrograma(arquivo);
