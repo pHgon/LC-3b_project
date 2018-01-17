@@ -18,7 +18,15 @@ public class Run {
         lista.geraPrograma(arquivo);
         lista.PrintIntrucao();
         
-        Memory mem = new Memory((int)Math.pow(2, 16));
+        // Inicia Memória e testa alguns valores
+        Memory mem = new Memory(c.MEM_SIZE);
+        mem.setByte(0, 127);
+        mem.setByte(1, -128);
+        mem.setWord(2, 32767);
+        mem.setWord(4, -32768);
+        System.out.println(mem.getByte(0) + " " + mem.getByte(1));
+        System.out.println(mem.getWord(2) + " " + mem.getWord(4));
+
         
         pc = 0;
 
@@ -45,6 +53,5 @@ public class Run {
         System.out.println("PC: " + pc);
         System.out.println(proc);
 
-        //Memory mem = new Memory(c.MEM_SIZE);
    }
 }
