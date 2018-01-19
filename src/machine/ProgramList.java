@@ -68,5 +68,7 @@ public class ProgramList {
         }
     }
  
-    
+    public int getNInstructions (){
+        return this.programa.size();
+    }
 }

@@ -18,8 +18,7 @@ public class Run {
         lista.geraPrograma(arquivo);
         lista.PrintIntrucao();
         
-        // Inicia Memória e testa alguns valores
-        System.out.println("MEM SIZE: " + c.MEM_SIZE);
+        // Inicia Memória e testa alguns valores        
         Memory mem = new Memory(c.MEM_SIZE);
         mem.setByte(0, 127);
         mem.setByte(1, -128);
@@ -29,20 +28,13 @@ public class Run {
         System.out.println(mem.getWord(2) + " " + mem.getWord(4));
 
         
-        pc = 0;
+        pc = offset + 1;
 
         Processor proc = new Processor();
         
-        pc += proc.executar(lista.getInstrucao(offset+1), mem, pc); 
-        pc += proc.executar(lista.getInstrucao(offset+2), mem, pc); 
-        pc += proc.executar(lista.getInstrucao(offset+3), mem, pc); 
-        pc += proc.executar(lista.getInstrucao(offset+4), mem, pc); 
-        pc += proc.executar(lista.getInstrucao(offset+5), mem, pc); 
-        pc += proc.executar(lista.getInstrucao(offset+6), mem, pc); 
-        pc += proc.executar(lista.getInstrucao(offset+7), mem, pc); 
-        pc += proc.executar(lista.getInstrucao(offset+8), mem, pc); 
-        pc += proc.executar(lista.getInstrucao(offset+9), mem, pc); 
-        pc += proc.executar(lista.getInstrucao(offset+10), mem, pc);         
+        while(pc >= offset && pc <= offset + lista.getNInstructions()){
+            pc += proc.executar(lista.getInstrucao(pc), mem, pc); 
+        }        
                 
         System.out.println("PC: " + pc);
         System.out.println(proc);
