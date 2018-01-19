@@ -12,13 +12,14 @@ public class Run {
      */
    public static void main(String[] args)
     {
-        String arquivo = "C:\\Users\\mateu\\Desktop\\LC-3b_project\\program.bin";
+        String arquivo = "program.bin";
         int offset = 500, pc; // definido pelo carregador
         ProgramList lista = new ProgramList(offset);
         lista.geraPrograma(arquivo);
         lista.PrintIntrucao();
         
         // Inicia Memória e testa alguns valores
+        System.out.println("MEM SIZE: " + c.MEM_SIZE);
         Memory mem = new Memory(c.MEM_SIZE);
         mem.setByte(0, 127);
         mem.setByte(1, -128);

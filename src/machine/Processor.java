@@ -175,14 +175,14 @@ public class Processor {
         return 1;
     }
     private int ldb(Instrucao instruction, int pc, Memory mem) {
-        Tuple tuple = Break.LDBLDILDR(instruction);
+        Tuple tuple = Break.LDBLDILDR(instruction);        
         int dr, baseR;
         short offset;
         dr = tuple.t1;
         baseR = tuple.t2;
         offset = (short)tuple.t3;
         
-        this.registradores[dr] = (short) mem.getMemory((this.registradores[baseR] + offset));
+        this.registradores[dr] = (short) mem.getByte((this.registradores[baseR] + offset));
         this.setNZP(this.registradores[dr]);
         
         return 1;
@@ -199,7 +199,7 @@ public class Processor {
         address = this.setZeroLast(address);
 
         
-        this.registradores[dr] = (short)mem.getMemory(mem.getMemory(address));        
+        this.registradores[dr] = (short)mem.getWord(mem.getWord(address));        
         
         this.setNZP(this.registradores[dr]);
         
@@ -216,7 +216,7 @@ public class Processor {
 
         address = this.setZeroLast(address);
         
-        this.registradores[dr] = (short)mem.getMemory(mem.getMemory(address));        
+        this.registradores[dr] = (short)mem.getWord(address);        
         
         this.setNZP(this.registradores[dr]);
         
@@ -230,7 +230,7 @@ public class Processor {
         dr = tuple.t1;
         offset = (short) ((tuple.t2 << 1) + pc + 1);
         
-        this.registradores[dr] = (short)(mem.getMemory(offset));
+        this.registradores[dr] = (short)offset;
         this.setNZP(this.registradores[dr]);
         
         return 1;
@@ -272,8 +272,8 @@ public class Processor {
         
         offset = (short) (this.registradores[baseR] + offset);
         
-        mem.setMemory(offset, this.registradores[sr]);
-        System.out.println("Pos:" + offset + " Value:" + mem.getMemory(offset));
+        mem.setByte(offset, this.registradores[sr]);
+        System.out.println("Pos:" + offset + " Value:" + mem.getByte(offset));
         return 1;
     }
     private int sti(Instrucao instruction, int pc, Memory mem) {
@@ -287,8 +287,8 @@ public class Processor {
         offset = (short) (this.registradores[baseR] + offset);
         offset = this.setZeroLast(offset);
         
-        mem.setMemory(mem.getMemory(offset), this.registradores[sr]);
-        System.out.println("Pos:" + mem.getMemory(offset) + " Value:" + mem.getMemory(mem.getMemory(offset)));
+        mem.setWord(mem.getWord(offset), this.registradores[sr]);
+        System.out.println("Pos:" + mem.getWord(offset) + " Value:" + mem.getWord(mem.getWord(offset)));
         return 1;
     }
 
@@ -303,8 +303,8 @@ public class Processor {
         offset = (short) (this.registradores[baseR] + (offset << 1));
         offset = this.setZeroLast(offset);
 
-        mem.setMemory(offset, this.registradores[sr]);
-        System.out.println("Pos:" + offset + " Value:" + mem.getMemory(offset));
+        mem.setWord(offset, this.registradores[sr]);
+        System.out.println("Pos:" + offset + " Value:" + mem.getWord(offset));
         return 1;
     }
     private short setZeroLast(int number){

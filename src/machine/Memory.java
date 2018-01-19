@@ -47,8 +47,13 @@ public class Memory {
      * @param position  Memory address
      * @return A integer value stored in the memory
      */
-    public int getByte(int position){
-        String value = this.posMemory[position];
+    public int getByte(int position){                
+        String value = this.posMemory[position];        
+        
+        if(value == null){
+            return 0;
+        }
+        
         if(value.charAt(0) == '1'){
             value = "111111111111111111111111" + value;
             long num = Long.parseLong(value, 2);
@@ -67,6 +72,11 @@ public class Memory {
         String high = this.posMemory[position];
         String low  = this.posMemory[position+1];
         high = high + low;
+        
+        if(high == null || low == null){
+            return 0;
+        }
+        
         if(high.charAt(0) == '1'){
             high = "1111111111111111" + high;
             long num = Long.parseLong(high, 2);
