@@ -25,8 +25,8 @@ public class Run {
         mem.setByte(1, -128);
         mem.setWord(2, 32767);
         mem.setWord(4, -32768);
-        System.out.println(mem.getByte(0) + " " + mem.getByte(1));
-        System.out.println(mem.getWord(2) + " " + mem.getWord(4));
+        System.out.println("\n" + mem.getByte(0) + " " + mem.getByte(1));
+        System.out.println(mem.getWord(2) + " " + mem.getWord(4) + "\n");
 
         
         pc = offset + 1;
