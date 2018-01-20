@@ -14,6 +14,8 @@ public class Memory {
      */
     public Memory(int size){
         this.posMemory = new String[size];
+        for(int i=0; i<size; i++)
+        	this.posMemory[i] = "00000000"
     }
     
     
@@ -50,10 +52,6 @@ public class Memory {
     public int getByte(int position){                
         String value = this.posMemory[position];        
         
-        if(value == null){
-            return 0;
-        }
-        
         if(value.charAt(0) == '1'){
             value = "111111111111111111111111" + value;
             long num = Long.parseLong(value, 2);
@@ -72,10 +70,6 @@ public class Memory {
         String high = this.posMemory[position];
         String low  = this.posMemory[position+1];
         high = high + low;
-        
-        if(high == null || low == null){
-            return 0;
-        }
         
         if(high.charAt(0) == '1'){
             high = "1111111111111111" + high;
