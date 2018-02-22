@@ -12,18 +12,24 @@ package machine;
 public class Processor {
     short[] registradores;
     int n, z, p;
+    String buffer = "";
+    
+    public String streamProcessor(){
+        return buffer + "\n";
+    }
     
     public Processor(){
         this.registradores = new short[8];
         this.n = 0;
         this.z = 0;
-        this.p = 0;        
+        this.p = 0;
+        this.buffer = "";
     }
     
     public int executar(Instrucao instruction, Memory mem, int pc){
         int offsetPC = 0;
-        System.out.println("PC: " + pc);
-        System.out.println("\nopcode: " + instruction.getOpcode());
+        buffer = this.buffer + "PC: " + pc;
+        buffer = this.buffer + "\nopcode: " + instruction.getOpcode() + "\n";
         switch(instruction.getOpcode()){
             case "0001":
                 offsetPC = this.add(instruction);
@@ -79,6 +85,11 @@ public class Processor {
         bitOp = tuple.t3;
         sr2 = tuple.t4;
         dir = (short)tuple.t5;
+        buffer = this.buffer +  "DR: " + Integer.toString(tuple.t1 +1) + "\n" +
+                                "SR1: " + Integer.toString(tuple.t2 +1) + "\n" +
+                                "BITOP: " + Integer.toString(tuple.t3) + "\n" +
+                                "SR2: " + Integer.toString(tuple.t4 +1) + "\n" +
+                                "DIR: " + Integer.toString(tuple.t5 ) + "\n\n";
         
         if(bitOp == 0){
             //add normal
@@ -103,7 +114,11 @@ public class Processor {
         bitOp = tuple.t3;
         sr2 = tuple.t4;
         dir = (short) tuple.t5;
-        
+                buffer = this.buffer +  "DR: " + Integer.toString(tuple.t1 +1) + "\n" +
+                                        "SR1: " + Integer.toString(tuple.t2 +1) + "\n" +
+                                        "BITOP: " + Integer.toString(tuple.t3) + "\n" +
+                                        "SR2: " + Integer.toString(tuple.t4 +1) + "\n" +
+                                        "DIR: " + Integer.toString(tuple.t5 ) + "\n\n";
         if(bitOp == 0){
             //and normal
             this.registradores[dr] = (short) (this.registradores[sr1] & this.registradores[sr2]); 
@@ -121,9 +136,13 @@ public class Processor {
         _z = tuple.t2;
         _p = tuple.t3;
         offset = tuple.t4;
-        
+                buffer = this.buffer +  "N: " + Integer.toString(tuple.t1) + "\n" +
+                                        "Z: " + Integer.toString(tuple.t2) + "\n" +
+                                        "P: " + Integer.toString(tuple.t3) + "\n" +
+                                        "OFFSET: " + Integer.toString(tuple.t4) + "\n\n";
+                
         if((_n == 1 && _n == this.n) || (_z == 1 && _z == this.z) || (_p == 1 && _p == this.p)){
-            System.out.println("Offset shiftado: " + (offset << 1));
+            buffer = this.buffer + "Offset shiftado: " + Integer.toString(offset << 1) + "\n";
             return offset << 1;
         }       
         
@@ -131,6 +150,7 @@ public class Processor {
     }
     private int jmpret(Instrucao instruction, int pc){
         Tuple tuple = Break.JMPRET(instruction);
+        buffer =  this.buffer + "BASE_R: " + Integer.toString(tuple.t1) + "\n\n";
         return this.registradores[tuple.t1] - pc;        
         /*if(tuple.t1 == 7){
             //ret
@@ -147,6 +167,9 @@ public class Processor {
         bitOp = tuple.t1;
         offset = tuple.t2;
         baseR = tuple.t3;
+        buffer = this.buffer +  "BITOP: " + Integer.toString(tuple.t1) + "\n" +
+                                "OFFSET: " + Integer.toString(tuple.t2) + "\n" +
+                                "BASE_R: " + Integer.toString(tuple.t3) + "\n\n" ;
         
         this.registradores[7] = (short) (pc + 1);
         if(bitOp == 1){
@@ -163,10 +186,12 @@ public class Processor {
         int dr, sr, number;
         dr = tuple.t1;
         sr = tuple.t2;        
-        
+         buffer = this.buffer +  "DR: " + Integer.toString(tuple.t1) + "\n" +
+                                 "SR: " + Integer.toString(tuple.t2) + "\n\n" ;
+
         
         number = ~Integer.parseInt(Integer.toBinaryString(this.registradores[sr]), 2);                    
-        System.out.println("Not Number: " +  number);
+        buffer = this.buffer + "Not Number:" + Integer.toString(number) + "\n";
 
         this.registradores[dr] = (short) number;
                        
@@ -181,6 +206,9 @@ public class Processor {
         dr = tuple.t1;
         baseR = tuple.t2;
         offset = (short)tuple.t3;
+         buffer = this.buffer +  "DR: " + Integer.toString(tuple.t1) + "\n" +
+                                 "BASE_R: " + Integer.toString(tuple.t2) + "\n" +
+                                 "OFFSET: " + Integer.toString(tuple.t3) + "\n\n" ;
         
         this.registradores[dr] = (short) mem.getByte((this.registradores[baseR] + offset));
         this.setNZP(this.registradores[dr]);
@@ -197,6 +225,9 @@ public class Processor {
         address = (short) (this.registradores[baseR] + (short) offset);        
 
         address = this.setZeroLast(address);
+        buffer = this.buffer +  "DR: " + Integer.toString(tuple.t1) + "\n" +
+                                "BASE_R: " + Integer.toString(tuple.t2) + "\n" +
+                                "OFFSET: " + Integer.toString(tuple.t3) + "\n\n" ;
 
         
         this.registradores[dr] = (short)mem.getWord(mem.getWord(address));        
@@ -212,7 +243,10 @@ public class Processor {
         dr = tuple.t1;
         baseR = tuple.t2;
         offset = (short)(tuple.t3 << 1);
-        address = (short) (this.registradores[baseR] + (short) offset);        
+        address = (short) (this.registradores[baseR] + (short) offset);
+         buffer = this.buffer +  "DR: " + Integer.toString(tuple.t1) + "\n" +
+                                 "BASE_R: " + Integer.toString(tuple.t2) + "\n" +
+                                 "OFFSET: " + Integer.toString(tuple.t3) + "\n\n" ;
 
         address = this.setZeroLast(address);
         
@@ -229,6 +263,8 @@ public class Processor {
         short offset;
         dr = tuple.t1;
         offset = (short) ((tuple.t2 << 1) + pc + 1);
+        buffer = this.buffer +  "DR: " + Integer.toString(tuple.t1) + "\n" +
+                                "OFFSET: " + Integer.toString(tuple.t2) + "\n\n" ;
         
         this.registradores[dr] = (short)offset;
         this.setNZP(this.registradores[dr]);
@@ -246,6 +282,12 @@ public class Processor {
         d = tuple.t4;
         offset = (short) tuple.t5;
         result = 0;
+        
+        buffer = this.buffer +  "DR: " + Integer.toString(tuple.t1) + "\n" +
+                                "SR1: " + Integer.toString(tuple.t2) + "\n" +
+                                "BITOP: " + Integer.toString(tuple.t3) + "\n" +
+                                "SR2: " + Integer.toString(tuple.t4) + "\n" +
+                                "DIR: " + Integer.toString(tuple.t5) + "\n\n";
         if(d == 0){
             result = (short)(this.registradores[sr] << offset);
         }
@@ -269,11 +311,14 @@ public class Processor {
         sr = tuple.t1;
         baseR = tuple.t2;
         offset = (short) tuple.t3;
+        buffer = this.buffer +  "SR: " + Integer.toString(tuple.t1) + "\n" +
+                                 "BASE_R: " + Integer.toString(tuple.t2) + "\n" +
+                                 "OFFSET: " + Integer.toString(tuple.t3) + "\n\n" ;
         
         offset = (short) (this.registradores[baseR] + offset);
         
         mem.setByte(offset, this.registradores[sr]);
-        System.out.println("Pos:" + offset + " Value:" + mem.getByte(offset));
+        buffer = this.buffer + "Pos:" + Integer.toString(offset) + " Value:" + Integer.toString(mem.getByte(offset)) + "\n";
         return 1;
     }
     private int sti(Instrucao instruction, int pc, Memory mem) {
@@ -283,12 +328,15 @@ public class Processor {
         sr = tuple.t1;
         baseR = tuple.t2;
         offset = (short) (tuple.t3 << 1);
+                buffer = this.buffer +  "SR: " + Integer.toString(tuple.t1) + "\n" +
+                                 "BASE_R: " + Integer.toString(tuple.t2) + "\n" +
+                                 "OFFSET: " + Integer.toString(tuple.t3) + "\n\n" ;
         
         offset = (short) (this.registradores[baseR] + offset);
         offset = this.setZeroLast(offset);
         
         mem.setWord(mem.getWord(offset), this.registradores[sr]);
-        System.out.println("Pos:" + mem.getWord(offset) + " Value:" + mem.getWord(mem.getWord(offset)));
+        buffer = this.buffer + "Pos:" + Integer.toString(mem.getWord(offset)) + " Value:" + Integer.toString(mem.getWord(mem.getWord(offset))) + "\n";
         return 1;
     }
 
@@ -299,12 +347,15 @@ public class Processor {
         sr = tuple.t1;
         baseR = tuple.t2;
         offset = (short) tuple.t3;
+                buffer = this.buffer +  "SR: " + Integer.toString(tuple.t1) + "\n" +
+                                 "BASE_R: " + Integer.toString(tuple.t2) + "\n" +
+                                 "OFFSET: " + Integer.toString(tuple.t3) + "\n\n" ;
         
         offset = (short) (this.registradores[baseR] + (offset << 1));
         offset = this.setZeroLast(offset);
 
         mem.setWord(offset, this.registradores[sr]);
-        System.out.println("Pos:" + offset + " Value:" + mem.getWord(offset));
+        buffer = this.buffer + "Pos: " + Integer.toString(offset) + " Value:" + Integer.toString(mem.getWord(offset)) + "\n";
         return 1;
     }
     private short setZeroLast(int number){

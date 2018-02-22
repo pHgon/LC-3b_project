@@ -35,7 +35,7 @@ public class JFrame extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        memoryTextArea = new javax.swing.JTextArea();
+        inicialMemoryTextArea = new javax.swing.JTextArea();
         memoryLabel = new javax.swing.JLabel();
         registrerLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -43,6 +43,14 @@ public class JFrame extends javax.swing.JFrame {
         consoleLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         logTextArea = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        log2TextArea = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        finalMemoryTextArea = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        mem1 = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -68,12 +76,12 @@ public class JFrame extends javax.swing.JFrame {
             }
         });
 
-        memoryTextArea.setColumns(20);
-        memoryTextArea.setRows(5);
-        jScrollPane1.setViewportView(memoryTextArea);
+        inicialMemoryTextArea.setColumns(20);
+        inicialMemoryTextArea.setRows(5);
+        jScrollPane1.setViewportView(inicialMemoryTextArea);
 
         memoryLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        memoryLabel.setText("Memória");
+        memoryLabel.setText("Memória teste");
 
         registrerLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         registrerLabel.setText("Registradores");
@@ -89,52 +97,88 @@ public class JFrame extends javax.swing.JFrame {
         logTextArea.setRows(5);
         jScrollPane2.setViewportView(logTextArea);
 
+        log2TextArea.setColumns(20);
+        log2TextArea.setRows(5);
+        jScrollPane4.setViewportView(log2TextArea);
+
+        finalMemoryTextArea.setColumns(20);
+        finalMemoryTextArea.setRows(5);
+        jScrollPane5.setViewportView(finalMemoryTextArea);
+
+        mem1.setColumns(20);
+        mem1.setRows(5);
+        jScrollPane6.setViewportView(mem1);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Memória Final");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setText("Memória Inicial");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                     .addComponent(registrerLabel)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane6))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(memoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(consoleLabel)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(memoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(consoleLabel)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(registrerLabel)
                     .addComponent(consoleLabel)
                     .addComponent(memoryLabel))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3)
-                    .addComponent(jScrollPane2))
-                .addContainerGap())
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Principal", jPanel1);
+        jTabbedPane1.addTab("Máquina", jPanel1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1158, Short.MAX_VALUE)
+            .addGap(0, 1249, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 577, Short.MAX_VALUE)
+            .addGap(0, 895, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("tab3", jPanel2);
@@ -143,25 +187,25 @@ public class JFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1254, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(223, 223, 223)
                 .addComponent(lc3Label, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66)
                 .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lc3Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1))
         );
 
@@ -176,12 +220,8 @@ public class JFrame extends javax.swing.JFrame {
         ProgramList lista = new ProgramList(offset);
         lista.geraPrograma(arquivo);
         
-        
         String saida = null;
         saida = lista.PrintIntrucao();
-        //System.out.println(saida);
-        
-        //sta.PrintIntrucao(); //esse metodo é void dai nao sei como mostrar ele na text area
         logTextArea.setText( saida + "\n" );
         
         // Inicia Memória e testa alguns valores        
@@ -191,36 +231,41 @@ public class JFrame extends javax.swing.JFrame {
         mem.setWord(2, 32767);
         mem.setWord(4, -32768);
         
-        memoryTextArea.setText(mem.getByte(0) + "\n" 
+        mem1.setText( mem.printMemory(0,100) );
+        
+        inicialMemoryTextArea.setText(mem.getByte(0) + "\n" 
                              + mem.getByte(1) + "\n" 
                              + mem.getWord(2) + "\n"
                              + mem.getWord(4) + "\n");
         
+
         
         pc = offset + 1;
 
         Processor proc = new Processor();
         
-        //mostrar no log?
+        //mostrando no log2
         while(pc >= offset && pc <= offset + lista.getNInstructions()){
             pc += proc.executar(lista.getInstrucao(pc), mem, pc); 
+            //System.out.println(proc.streamProcessor());
+            log2TextArea.setText(proc.streamProcessor() + "\n");
         }        
         
         //mostrando os reg
-        regsTextArea.setText("> " + proc);
+        regsTextArea.setText(""+proc );
         
-        System.out.println("PC: " + pc);
-        //System.out.println(proc);
-        
-        
+        finalMemoryTextArea.setText( mem.printMemory(offset,offset+100) );
         
     }//GEN-LAST:event_btnRunActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
-        memoryTextArea.setText("");
+        inicialMemoryTextArea.setText("");
         logTextArea.setText("");
         regsTextArea.setText("");
+        log2TextArea.setText("");
+        finalMemoryTextArea.setText("");
+        mem1.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
 
     /**
@@ -265,16 +310,24 @@ public class JFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnRun;
     private javax.swing.JLabel consoleLabel;
+    private javax.swing.JTextArea finalMemoryTextArea;
+    private javax.swing.JTextArea inicialMemoryTextArea;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lc3Label;
+    private javax.swing.JTextArea log2TextArea;
     private javax.swing.JTextArea logTextArea;
+    private javax.swing.JTextArea mem1;
     private javax.swing.JLabel memoryLabel;
-    private javax.swing.JTextArea memoryTextArea;
     private javax.swing.JLabel registrerLabel;
     private javax.swing.JTextArea regsTextArea;
     // End of variables declaration//GEN-END:variables

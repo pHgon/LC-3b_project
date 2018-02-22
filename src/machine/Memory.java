@@ -18,6 +18,15 @@ public class Memory {
         	this.posMemory[i] = "00000000";
     }
     
+    public String printMemory(int inicio, int fim){
+        String buffer = "";
+        for(int i=inicio ; i < fim; i++) {
+            buffer = buffer + "posição: " + Integer.toString(i)+ " =" + Integer.parseInt(posMemory[i]) + "\n";
+        }
+
+        return buffer;
+    }
+    
     
     /**
      * Set a memory position with a 8 bits value (-128 a 127)
