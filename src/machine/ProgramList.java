@@ -60,12 +60,17 @@ public class ProgramList {
         return null;
     } 
     
-    public void PrintIntrucao()
+    public String PrintIntrucao()
     {
+        String stream = "";
+
+
         for(Instrucao temp : programa)
         {
-            System.out.println(temp);
+            stream = stream + temp.toString() + "\n";
+            
         }
+        return stream;
     }
  
     public int getNInstructions (){
