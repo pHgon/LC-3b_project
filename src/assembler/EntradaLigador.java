@@ -15,6 +15,35 @@ import java.util.Map;
 public class EntradaLigador {
     private ArrayList <InstrucaoAssembler> saida;
     private Map<String, Integer> tabelaDeSimbolo;
+    private Integer numEnderecos;
+    
+    public void contarEnderecos(){
+        numEnderecos = 0;
+        for(int i = 0; i < this.saida.size(); i++){
+            String label = saida.get(i).getLabel();
+            String operator = saida.get(i).getOperator();
+            String OP1 = saida.get(i).getOP1();
+            String OP2 = saida.get(i).getOP2();
+            String OP3 = saida.get(i).getOP3();            
+                        
+            if(label != null && !label.isEmpty()){
+                numEnderecos++;
+            }
+            if(operator != null && !operator.isEmpty()){
+                numEnderecos++;
+            }
+            if(OP1 != null && !OP1.isEmpty()){
+                numEnderecos++;
+            }
+            if(OP2 != null && !OP2.isEmpty()){
+                numEnderecos++;
+            }
+            if(OP3 != null && !OP3.isEmpty()){
+                numEnderecos++;
+            }
+        }
+        setNumEnderecos(numEnderecos);
+    }
 
     /**
      * @return the saida
@@ -42,6 +71,20 @@ public class EntradaLigador {
      */
     public void setTabelaDeSimbolo(Map<String, Integer> tabelaDeSimbolo) {
         this.tabelaDeSimbolo = tabelaDeSimbolo;
+    }
+
+    /**
+     * @return the numEnderecos
+     */
+    public Integer getNumEnderecos() {
+        return numEnderecos;
+    }
+
+    /**
+     * @param numEnderecos the numEnderecos to set
+     */
+    public void setNumEnderecos(Integer numEnderecos) {
+        this.numEnderecos = numEnderecos;
     }
     
     
