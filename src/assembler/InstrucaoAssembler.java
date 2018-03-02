@@ -39,8 +39,26 @@ public class InstrucaoAssembler {
      * @return retorna Instrucao concatenada no formato da saida
      */
     public  String getInstrucaoFULL()
-    {
-        return this.label + "\t" + this.Operator + "\t" + this.OP1 + ",\t" + this.OP2 + ",\t" + this.OP3;
+    {   
+        if(label == "" && Operator != "" && OP1 == "" && OP2 == "" && OP3 == "" )
+            return "\t" + Operator;
+        if(label == "" && Operator != "" && OP1 != "" && OP2 == "" && OP3 == "" )
+            return "\t" + Operator + "\t" + OP1;
+        if(label == "" && Operator != "" && OP1 != "" && OP2 != "" && OP3 == "" )
+            return "\t" + Operator + "\t" + OP1 + "\t" + OP2;
+        if(label == "" && Operator != "" && OP1 != "" && OP2 != "" && OP3 != "" )
+            return "\t" + Operator+ "\t" + OP1 + "\t" + OP2 + "\t" + OP3;
+        
+        if(label != "" && Operator != "" && OP1 == "" && OP2 == "" && OP3 == "" )
+            return label + "\t" + Operator;
+        if(label != "" && Operator != "" && OP1 != "" && OP2 == "" && OP3 == "" )
+            return label +"\t" + Operator + "\t" + OP1;
+        if(label != "" && Operator != "" && OP1 != "" && OP2 != "" && OP3 == "" )
+            return label +"\t" + Operator + "\t" + OP1 + "\t" + OP2;
+        if(label != "" && Operator != "" && OP1 != "" && OP2 != "" && OP3 != "" )
+            return label +"\t" + Operator+ "\t" + OP1 + "\t" + OP2 + "\t" + OP3;
+        
+        return label;
     }
     
 }
