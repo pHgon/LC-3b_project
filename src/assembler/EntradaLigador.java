@@ -16,6 +16,7 @@ public class EntradaLigador {
     private ArrayList <InstrucaoAssembler> saida;
     private Map<String, Integer> tabelaDeSimbolo;
     private Integer numEnderecos;
+    private Integer enderecoInicial;
     
     public void contarEnderecos(){
         numEnderecos = 0;
@@ -25,10 +26,7 @@ public class EntradaLigador {
             String OP1 = saida.get(i).getOP1();
             String OP2 = saida.get(i).getOP2();
             String OP3 = saida.get(i).getOP3();            
-                        
-            if(label != null && !label.isEmpty()){
-                numEnderecos++;
-            }
+                                    
             if(operator != null && !operator.isEmpty()){
                 numEnderecos++;
             }
@@ -85,6 +83,20 @@ public class EntradaLigador {
      */
     public void setNumEnderecos(Integer numEnderecos) {
         this.numEnderecos = numEnderecos;
+    }
+
+    /**
+     * @return the enderecoInicial
+     */
+    public Integer getEnderecoInicial() {
+        return enderecoInicial;
+    }
+
+    /**
+     * @param enderecoInicial the enderecoInicial to set
+     */
+    public void setEnderecoInicial(Integer enderecoInicial) {
+        this.enderecoInicial = enderecoInicial;
     }
     
     
