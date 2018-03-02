@@ -6,14 +6,14 @@ import constants.Constants;
  * @author mateu
  */
 public class Run {
-    private static final class c extends Constants{} // Classe com as constantes
+    public static final class c extends Constants{} // Classe com as constantes
 
     /**
      * @param args the command line arguments
      */
    public static void main(String[] args)
     {
-        String arquivo = "program.bin";
+        String arquivo = "/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/program.bin";
         int offset = 500, pc; // definido pelo carregador
         ProgramList lista = new ProgramList(offset);
         lista.geraPrograma(arquivo);

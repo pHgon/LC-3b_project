@@ -18,10 +18,17 @@ public class Memory {
         	this.posMemory[i] = "00000000";
     }
     
+    /**
+     * Print a memory [inicio:fim] memory value
+     * @param inicio 
+     * @param fim
+     * @return 
+     */
+    
     public String printMemory(int inicio, int fim){
         String buffer = "";
         for(int i=inicio ; i < fim; i++) {
-            buffer = buffer + "posição: " + Integer.toString(i)+ " =" + Integer.parseInt(posMemory[i]) + "\n";
+            buffer = buffer + "posição: " + Integer.toString(i)+ " = " + getByte(i) + "\n";
         }
 
         return buffer;

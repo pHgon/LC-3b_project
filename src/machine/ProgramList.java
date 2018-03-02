@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author mateu
+ * @author mateus
  */
 public class ProgramList {
     
@@ -74,6 +74,6 @@ public class ProgramList {
     }
  
     public int getNInstructions (){
-        return this.programa.size();
+            return this.programa.size();
     }
 }

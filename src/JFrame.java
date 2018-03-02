@@ -33,6 +33,7 @@ public class JFrame extends javax.swing.JFrame {
         btnRun = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         inicialMemoryTextArea = new javax.swing.JTextArea();
@@ -51,7 +52,6 @@ public class JFrame extends javax.swing.JFrame {
         mem1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +75,19 @@ public class JFrame extends javax.swing.JFrame {
                 btnClearActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1235, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 808, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab3", jPanel2);
 
         inicialMemoryTextArea.setColumns(20);
         inicialMemoryTextArea.setRows(5);
@@ -141,7 +154,7 @@ public class JFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,29 +178,16 @@ public class JFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Máquina", jPanel1);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1249, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 895, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("tab3", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1254, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(223, 223, 223)
                 .addComponent(lc3Label, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,7 +215,7 @@ public class JFrame extends javax.swing.JFrame {
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
         // TODO add your handling code here:
        
-        String arquivo = "program.bin";
+        String arquivo = "/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/program.bin";
         int offset = 500, pc; // definido pelo carregador
         ProgramList lista = new ProgramList(offset);
         lista.geraPrograma(arquivo);
@@ -225,7 +225,8 @@ public class JFrame extends javax.swing.JFrame {
         logTextArea.setText( saida + "\n" );
         
         // Inicia Memória e testa alguns valores        
-        Memory mem = new Memory(Run.c.MEM_SIZE);
+        Memory mem;
+        mem = new Memory(Run.c.MEM_SIZE);
         mem.setByte(0, 127);
         mem.setByte(1, -128);
         mem.setWord(2, 32767);
@@ -234,14 +235,10 @@ public class JFrame extends javax.swing.JFrame {
         mem1.setText( mem.printMemory(0,100) );
         
         inicialMemoryTextArea.setText(mem.getByte(0) + "\n" 
-                             + mem.getByte(1) + "\n" 
-                             + mem.getWord(2) + "\n"
-                             + mem.getWord(4) + "\n");
-        
-
-        
+                                    + mem.getByte(1) + "\n" 
+                                    + mem.getWord(2) + "\n"
+                                    + mem.getWord(4) + "\n");        
         pc = offset + 1;
-
         Processor proc = new Processor();
         
         //mostrando no log2
@@ -254,7 +251,7 @@ public class JFrame extends javax.swing.JFrame {
         //mostrando os reg
         regsTextArea.setText(""+proc );
         
-        finalMemoryTextArea.setText( mem.printMemory(offset,offset+100) );
+        finalMemoryTextArea.setText( mem.printMemory(0,100) );
         
     }//GEN-LAST:event_btnRunActionPerformed
 

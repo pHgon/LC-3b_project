@@ -152,14 +152,7 @@ public class Processor {
         Tuple tuple = Break.JMPRET(instruction);
         buffer =  this.buffer + "BASE_R: " + Integer.toString(tuple.t1) + "\n\n";
         return this.registradores[tuple.t1] - pc;        
-        /*if(tuple.t1 == 7){
-            //ret
-            return this.registradores[7] - pc;        
-        }
-        else{
-            //jmp            
-            
-        }*/        
+      
     }
     private int jsrjsrr(Instrucao instruction, int pc) {
         Tuple tuple = Break.JSRJSRR(instruction);
@@ -248,10 +241,8 @@ public class Processor {
                                  "BASE_R: " + Integer.toString(tuple.t2) + "\n" +
                                  "OFFSET: " + Integer.toString(tuple.t3) + "\n\n" ;
 
-        address = this.setZeroLast(address);
-        
-        this.registradores[dr] = (short)mem.getWord(address);        
-        
+        address = this.setZeroLast(address);        
+        this.registradores[dr] = (short)mem.getWord(address);                
         this.setNZP(this.registradores[dr]);
         
         return 1;
@@ -281,8 +272,7 @@ public class Processor {
         a = tuple.t3;
         d = tuple.t4;
         offset = (short) tuple.t5;
-        result = 0;
-        
+        result = 0;        
         buffer = this.buffer +  "DR: " + Integer.toString(tuple.t1) + "\n" +
                                 "SR1: " + Integer.toString(tuple.t2) + "\n" +
                                 "BITOP: " + Integer.toString(tuple.t3) + "\n" +
@@ -328,9 +318,9 @@ public class Processor {
         sr = tuple.t1;
         baseR = tuple.t2;
         offset = (short) (tuple.t3 << 1);
-                buffer = this.buffer +  "SR: " + Integer.toString(tuple.t1) + "\n" +
-                                 "BASE_R: " + Integer.toString(tuple.t2) + "\n" +
-                                 "OFFSET: " + Integer.toString(tuple.t3) + "\n\n" ;
+        buffer = this.buffer +  "SR: " + Integer.toString(tuple.t1) + "\n" +
+                                "BASE_R: " + Integer.toString(tuple.t2) + "\n" +
+                                "OFFSET: " + Integer.toString(tuple.t3) + "\n\n" ;
         
         offset = (short) (this.registradores[baseR] + offset);
         offset = this.setZeroLast(offset);
@@ -347,9 +337,9 @@ public class Processor {
         sr = tuple.t1;
         baseR = tuple.t2;
         offset = (short) tuple.t3;
-                buffer = this.buffer +  "SR: " + Integer.toString(tuple.t1) + "\n" +
-                                 "BASE_R: " + Integer.toString(tuple.t2) + "\n" +
-                                 "OFFSET: " + Integer.toString(tuple.t3) + "\n\n" ;
+        buffer = this.buffer +  "SR: " + Integer.toString(tuple.t1) + "\n" +
+                                "BASE_R: " + Integer.toString(tuple.t2) + "\n" +
+                                "OFFSET: " + Integer.toString(tuple.t3) + "\n\n" ;
         
         offset = (short) (this.registradores[baseR] + (offset << 1));
         offset = this.setZeroLast(offset);
@@ -387,14 +377,13 @@ public class Processor {
     }
     @Override
     public String toString(){
-        return "Registradores: " + 
-                this.registradores[0] + " " +
-                this.registradores[1] + " " +
-                this.registradores[2] + " " +
-                this.registradores[3] + " " +
-                this.registradores[4] + " " +
-                this.registradores[5] + " " +
-                this.registradores[6] + " " +
-                this.registradores[7] + " ";
+        return  "R[0]: "+this.registradores[0] + "\n" +
+                "R[1]: "+this.registradores[1] + "\n" +
+                "R[2]: "+this.registradores[2] + "\n" +
+                "R[3]: "+this.registradores[3] + "\n" +
+                "R[4]: "+this.registradores[4] + "\n" +
+                "R[5]: "+this.registradores[5] + "\n" +
+                "R[6]: "+this.registradores[6] + "\n" +
+                "R[7]: "+this.registradores[7] + "\n";
     }         
 }
