@@ -40,25 +40,95 @@ public class InstrucaoAssembler {
      */
     public  String getInstrucaoFULL()
     {   
-        if(label == "" && Operator != "" && OP1 == "" && OP2 == "" && OP3 == "" )
-            return "\t" + Operator;
-        if(label == "" && Operator != "" && OP1 != "" && OP2 == "" && OP3 == "" )
-            return "\t" + Operator + "\t" + OP1;
-        if(label == "" && Operator != "" && OP1 != "" && OP2 != "" && OP3 == "" )
-            return "\t" + Operator + "\t" + OP1 + "\t" + OP2;
-        if(label == "" && Operator != "" && OP1 != "" && OP2 != "" && OP3 != "" )
-            return "\t" + Operator+ "\t" + OP1 + "\t" + OP2 + "\t" + OP3;
+        if(getLabel() == "" && getOperator() != "" && getOP1() == "" && getOP2() == "" && getOP3() == "" )
+            return "\t" + getOperator();
+        if(getLabel() == "" && getOperator() != "" && getOP1() != "" && getOP2() == "" && getOP3() == "" )
+            return "\t" + getOperator() + "\t" + getOP1();
+        if(getLabel() == "" && getOperator() != "" && getOP1() != "" && getOP2() != "" && getOP3() == "" )
+            return "\t" + getOperator() + "\t" + getOP1() + "\t" + getOP2();
+        if(getLabel() == "" && getOperator() != "" && getOP1() != "" && getOP2() != "" && getOP3() != "" )
+            return "\t" + getOperator()+ "\t" + getOP1() + "\t" + getOP2() + "\t" + getOP3();
         
-        if(label != "" && Operator != "" && OP1 == "" && OP2 == "" && OP3 == "" )
-            return label + "\t" + Operator;
-        if(label != "" && Operator != "" && OP1 != "" && OP2 == "" && OP3 == "" )
-            return label +"\t" + Operator + "\t" + OP1;
-        if(label != "" && Operator != "" && OP1 != "" && OP2 != "" && OP3 == "" )
-            return label +"\t" + Operator + "\t" + OP1 + "\t" + OP2;
-        if(label != "" && Operator != "" && OP1 != "" && OP2 != "" && OP3 != "" )
-            return label +"\t" + Operator+ "\t" + OP1 + "\t" + OP2 + "\t" + OP3;
+        if(getLabel() != "" && getOperator() != "" && getOP1() == "" && getOP2() == "" && getOP3() == "" )
+            return getLabel() + "\t" + getOperator();
+        if(getLabel() != "" && getOperator() != "" && getOP1() != "" && getOP2() == "" && getOP3() == "" )
+            return getLabel() +"\t" + getOperator() + "\t" + getOP1();
+        if(getLabel() != "" && getOperator() != "" && getOP1() != "" && getOP2() != "" && getOP3() == "" )
+            return getLabel() +"\t" + getOperator() + "\t" + getOP1() + "\t" + getOP2();
+        if(getLabel() != "" && getOperator() != "" && getOP1() != "" && getOP2() != "" && getOP3() != "" )
+            return getLabel() +"\t" + getOperator()+ "\t" + getOP1() + "\t" + getOP2() + "\t" + getOP3();
         
+        return getLabel();
+    }
+
+    /**
+     * @return the label
+     */
+    public String getLabel() {
         return label;
+    }
+
+    /**
+     * @param label the label to set
+     */
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    /**
+     * @return the Operator
+     */
+    public String getOperator() {
+        return Operator;
+    }
+
+    /**
+     * @param Operator the Operator to set
+     */
+    public void setOperator(String Operator) {
+        this.Operator = Operator;
+    }
+
+    /**
+     * @return the OP1
+     */
+    public String getOP1() {
+        return OP1;
+    }
+
+    /**
+     * @param OP1 the OP1 to set
+     */
+    public void setOP1(String OP1) {
+        this.OP1 = OP1;
+    }
+
+    /**
+     * @return the OP2
+     */
+    public String getOP2() {
+        return OP2;
+    }
+
+    /**
+     * @param OP2 the OP2 to set
+     */
+    public void setOP2(String OP2) {
+        this.OP2 = OP2;
+    }
+
+    /**
+     * @return the OP3
+     */
+    public String getOP3() {
+        return OP3;
+    }
+
+    /**
+     * @param OP3 the OP3 to set
+     */
+    public void setOP3(String OP3) {
+        this.OP3 = OP3;
     }
     
 }
