@@ -22,25 +22,39 @@ public class Run {
     {
         InstrucaoAssembler mod1Inst1 = new InstrucaoAssembler("label1", "LD", "R0", "X", "");
         InstrucaoAssembler mod1Inst2 = new InstrucaoAssembler("label2", "LD", "R1", "Y", "");
-        InstrucaoAssembler mod2Inst1 = new InstrucaoAssembler("label1", "NOT", "R2", "R1", "");
-        InstrucaoAssembler mod2Inst2 = new InstrucaoAssembler("label2", "ADDI", "R2", "R2", "#1");  
+        InstrucaoAssembler mod1Inst3 = new InstrucaoAssembler("Z", ".INTDEF", "33", "", "");
+        
+        InstrucaoAssembler mod2Inst1 = new InstrucaoAssembler("label3", "NOT", "R2", "R1", "");
+        InstrucaoAssembler mod2Inst2 = new InstrucaoAssembler("label4", "ADD", "R2", "R2", "Z");  
+        InstrucaoAssembler mod2Inst3 = new InstrucaoAssembler("X", ".INTDEF", "10", "", "");  
+        InstrucaoAssembler mod2Inst4 = new InstrucaoAssembler("Y", ".INTDEF", "40", "", "");  
         
         ArrayList<InstrucaoAssembler> mod1 = new ArrayList();
         ArrayList<InstrucaoAssembler> mod2 = new ArrayList();
         
         mod1.add(mod1Inst1);
         mod1.add(mod1Inst2);
+        mod1.add(mod1Inst3);
+        
         mod2.add(mod2Inst1);
         mod2.add(mod2Inst2);
+        mod2.add(mod2Inst3);
+        mod2.add(mod2Inst4);
         
-        Map<String, Integer> tabelaDeSimbolo1 = new HashMap<>();
-        Map<String, Integer> tabelaDeSimbolo2 = new HashMap<>();
-        tabelaDeSimbolo1.put("label1", 0);
-        tabelaDeSimbolo1.put("label2", 3);
-        tabelaDeSimbolo1.put("X", -1);
-        tabelaDeSimbolo1.put("label1", 0);
-        tabelaDeSimbolo1.put("label2", 3);
-        tabelaDeSimbolo1.put("X", 33);
+        Map<String, String> tabelaDeSimbolo1 = new HashMap<>();
+        Map<String, String> tabelaDeSimbolo2 = new HashMap<>();
+        
+        tabelaDeSimbolo1.put("label1", Integer.toString(0));
+        tabelaDeSimbolo1.put("X", "null");
+        tabelaDeSimbolo1.put("label2", Integer.toString(3));
+        tabelaDeSimbolo1.put("Z", Integer.toString(6));
+        
+        
+        tabelaDeSimbolo2.put("label3", Integer.toString(0));
+        tabelaDeSimbolo2.put("label4", Integer.toString(3));
+        tabelaDeSimbolo2.put("Z", "null");
+        tabelaDeSimbolo2.put("X", Integer.toString(7));
+        tabelaDeSimbolo2.put("Y", Integer.toString(9));
         
         
         EntradaLigador entradaLigador1 = new EntradaLigador();

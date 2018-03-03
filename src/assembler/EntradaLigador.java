@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class EntradaLigador {
     private ArrayList <InstrucaoAssembler> saida;
-    private Map<String, Integer> tabelaDeSimbolo;
+    private Map<String, String> tabelaDeSimbolo;
     private Integer numEnderecos;
     private Integer enderecoInicial;
     
@@ -60,14 +60,14 @@ public class EntradaLigador {
     /**
      * @return the tabelaDeSimbolo
      */
-    public Map<String, Integer> getTabelaDeSimbolo() {
+    public Map<String, String> getTabelaDeSimbolo() {
         return tabelaDeSimbolo;
     }
 
     /**
      * @param tabelaDeSimbolo the tabelaDeSimbolo to set
      */
-    public void setTabelaDeSimbolo(Map<String, Integer> tabelaDeSimbolo) {
+    public void setTabelaDeSimbolo(Map<String, String> tabelaDeSimbolo) {
         this.tabelaDeSimbolo = tabelaDeSimbolo;
     }
 

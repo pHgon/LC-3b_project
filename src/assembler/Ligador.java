@@ -6,6 +6,9 @@
 package assembler;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -20,19 +23,45 @@ public class Ligador {
      */
     public EntradaCarregador liga(ArrayList<EntradaLigador> entradasLigador){
         EntradaCarregador entradaCarregador = new EntradaCarregador();
-        ArrayList<InstrucaoAssembler> intrucoesAssembler = new ArrayList<>();
+        ArrayList<InstrucaoAssembler> intrucoesAssemblerGeral = new ArrayList<>();
+        int offsetModulos = 0;
+        Map<String, String> tabelaDefinicaoGlobal = new HashMap<>();
         
+        //percorre todos os modulos 
         for(int i = 0; i < entradasLigador.size(); i++){
-            ArrayList<InstrucaoAssembler> saida = entradasLigador.get(i).getSaida();
+            //pega as instrucoes do modulo
+            ArrayList<InstrucaoAssembler> saida = entradasLigador.get(i).getSaida();            
+            
+            //pega a tabela de simbolos
+            Map tabelaDeSimbolos = entradasLigador.get(i).getTabelaDeSimbolo();
+            
+            //copia as instrucoes
             for(int j = 0; j < saida.size(); j++){
-                intrucoesAssembler.add(saida.get(j));
-                System.out.println(saida.get(j).getOperator());
+                intrucoesAssemblerGeral.add(saida.get(j));
             }
+            
+            //percorre a tabela de simbolos e vê se existem novos simbolos e atribui o endereco correto
+            System.out.println("\nTabela de Definição do Modulo " + i + ":\n");            
+            for (String temp : entradasLigador.get(i).getTabelaDeSimbolo().keySet()) {
+                System.out.println(temp + " " + tabelaDeSimbolos.get(temp));
+                if(tabelaDeSimbolos.get(temp) != "null"){
+                    int address = Integer.parseInt((String) tabelaDeSimbolos.get(temp));
+                    tabelaDefinicaoGlobal.put(temp, Integer.toString(address + offsetModulos));   
+                }                                
+            }
+            offsetModulos += entradasLigador.get(i).getNumEnderecos();            
         }
         
         
-        //entradaCarregador.setSaida(intrucoesAssembler);
-                
+        System.out.println("\nTabela de Definições Global:\n");            
+        for (String temp : tabelaDefinicaoGlobal.keySet()) {
+            System.out.println(temp + " " + tabelaDefinicaoGlobal.get(temp));                
+        }
+        System.out.println();
+
+        
+        entradaCarregador.setSaida(intrucoesAssemblerGeral);
+        entradaCarregador.setTabelaDeDefinicoes(tabelaDefinicaoGlobal);
         return entradaCarregador;
     }
 }
