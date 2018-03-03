@@ -28,7 +28,7 @@ public class InstrucaoAssembler {
     public InstrucaoAssembler(String l, String Oper, String OP1, String OP2, String OP3)
     {
         this.label = l;
-        this.Operator = OP1;
+        this.Operator = Oper;
         this.OP1 = OP1;
         this.OP2 = OP2;
         this.OP3 = OP3;

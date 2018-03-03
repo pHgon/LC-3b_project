@@ -51,6 +51,61 @@ public class Ligador {
             }
             offsetModulos += entradasLigador.get(i).getNumEnderecos();            
         }
+        System.out.println();
+
+        for(int i = 0; i < intrucoesAssemblerGeral.size(); i++){
+            System.out.println(intrucoesAssemblerGeral.get(i).getInstrucaoFULL());            
+        }
+        System.out.println();
+
+        
+        for(int i = 0; i < intrucoesAssemblerGeral.size(); i++){
+            InstrucaoAssembler inst = intrucoesAssemblerGeral.get(i);
+            if(tabelaDefinicaoGlobal.get(inst.getOP1()) != null ){
+                //existe o simbolo                
+                Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP1()));
+                pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
+
+                if(".INTDEF".equals(intrucoesAssemblerGeral.get(pos).getOperator())){
+                    //eh constante
+                    intrucoesAssemblerGeral.get(i).setOP1(intrucoesAssemblerGeral.get(pos).getOP1());
+                }
+                else{
+                    //eh label
+                    intrucoesAssemblerGeral.get(i).setOP1(Integer.toString(pos));
+                }
+            }
+            if(tabelaDefinicaoGlobal.get(inst.getOP2()) != null ){
+                //existe o simbolo                
+                Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP2()));
+                pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
+                //System.out.println("OP2: " + inst.getOP2() + " Valor na Tabela: " + tabelaDefinicaoGlobal.get(inst.getOP2()) + " linha: " + pos);
+                if(".INTDEF".equals(intrucoesAssemblerGeral.get(pos).getOperator())){
+                    //eh constante
+                    intrucoesAssemblerGeral.get(i).setOP2(intrucoesAssemblerGeral.get(pos).getOP1());
+                }
+                else{
+                    //eh label
+                    intrucoesAssemblerGeral.get(i).setOP2(Integer.toString(pos));
+                }
+            }
+            if(tabelaDefinicaoGlobal.get(inst.getOP3()) != null ){
+                //existe o simbolo                
+                Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP3()));
+                pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
+
+                if(".INTDEF".equals(intrucoesAssemblerGeral.get(pos).getOperator())){
+                    //eh constante
+                    intrucoesAssemblerGeral.get(i).setOP3(intrucoesAssemblerGeral.get(pos).getOP1());
+                }
+                else{
+                    //eh label
+                    intrucoesAssemblerGeral.get(i).setOP3(Integer.toString(pos));
+                }
+            }
+            
+            System.out.println(intrucoesAssemblerGeral.get(i).getInstrucaoFULL());            
+        }
         
         
         System.out.println("\nTabela de Definições Global:\n");            
@@ -63,5 +118,26 @@ public class Ligador {
         entradaCarregador.setSaida(intrucoesAssemblerGeral);
         entradaCarregador.setTabelaDeDefinicoes(tabelaDefinicaoGlobal);
         return entradaCarregador;
+    }
+
+    private Integer contarLinhas(ArrayList<InstrucaoAssembler> intrucoesAssemblerGeral, Integer pos) {
+        int temp = 0, contador = 0;
+        for(int i = 0; i < intrucoesAssemblerGeral.size(); i++){            
+            contador++;
+            if(intrucoesAssemblerGeral.get(i).getOP1() != null && !intrucoesAssemblerGeral.get(i).getOP1().isEmpty()){
+                contador++;
+            }
+            if(intrucoesAssemblerGeral.get(i).getOP2() != null && !intrucoesAssemblerGeral.get(i).getOP2().isEmpty()){
+                contador++;
+            }
+            if(intrucoesAssemblerGeral.get(i).getOP3() != null && !intrucoesAssemblerGeral.get(i).getOP3().isEmpty()){
+                contador++;
+            }
+            temp++;
+            if(contador >= pos){
+                break;
+            }
+        }
+        return temp;
     }
 }
