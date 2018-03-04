@@ -2,7 +2,7 @@ package machine;
 
 /**
  *
- * @author mateu
+ * @author mateus
  */
 public class Instrucao {
     

@@ -47,8 +47,7 @@ public class InstrucaoAssembler {
         if(getLabel() == "" && getOperator() != "" && getOP1() != "" && getOP2() != "" && getOP3() == "" )
             return "\t" + getOperator() + "\t" + getOP1() + "\t" + getOP2();
         if(getLabel() == "" && getOperator() != "" && getOP1() != "" && getOP2() != "" && getOP3() != "" )
-            return "\t" + getOperator()+ "\t" + getOP1() + "\t" + getOP2() + "\t" + getOP3();
-        
+            return "\t" + getOperator()+ "\t" + getOP1() + "\t" + getOP2() + "\t" + getOP3();        
         if(getLabel() != "" && getOperator() != "" && getOP1() == "" && getOP2() == "" && getOP3() == "" )
             return getLabel() + "\t" + getOperator();
         if(getLabel() != "" && getOperator() != "" && getOP1() != "" && getOP2() == "" && getOP3() == "" )

@@ -29,7 +29,7 @@ public class ProgramList {
         try(BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha = br.readLine();
             while(linha != null)
-            {                
+            {                ;
                 if(i != 0)
                 {
                     opcode = linha.substring(0, 4);

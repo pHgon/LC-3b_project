@@ -1,4 +1,4 @@
-.ORIG	X3000;
+.ORIG	12288
 
 	LD	RO,	X
 	LD	R1,	Y
