@@ -32,7 +32,7 @@ public class ProcessadorMacro {
         this.nomeArquivo = nomeArquivo;
         
         //ler arquivo.
-        try(BufferedReader br =  new BufferedReader(new FileReader("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/" +nomeArquivo)))
+        try(BufferedReader br =  new BufferedReader(new FileReader(nomeArquivo)))
         {
             String linha = br.readLine(); 
             while(linha != null)
@@ -157,7 +157,6 @@ public class ProcessadorMacro {
             while(out != null)
             {
                 String[] splitOut = out.split("\\t");
-                String l,op,op1,op2,op3;
                 System.out.println("splitou macro");
                 for(int i = 2 ; i < splitOut.length ;  i++)
                 {

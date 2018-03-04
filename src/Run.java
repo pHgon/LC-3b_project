@@ -22,7 +22,7 @@ public class Run {
    public static void main(String[] args)
     {
         
-        ProcessadorMacro pr = new ProcessadorMacro("LC3EntradaProcMacro.txt");
+        ProcessadorMacro pr = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro.txt");
         pr.printExpanded();
         
         
