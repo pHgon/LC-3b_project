@@ -25,11 +25,11 @@ public class Run {
     {
     
         // chama duas vezes o processador de macros, uma para cada modulo e retorna entrada para MONTADOR
-        ProcessadorMacro pr1 = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro.txt");
+        /*ProcessadorMacro pr1 = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro.txt");
         pr1.printExpanded();
         ArrayList<InstrucaoAssembler> entradaMontador1 = pr1.getEntradaMontador();
         ProcessadorMacro pr2 = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro.txt");
-        ArrayList<InstrucaoAssembler> entradaMontador2 = pr2.getEntradaMontador();
+        ArrayList<InstrucaoAssembler> entradaMontador2 = pr2.getEntradaMontador();*/
         
         
         
@@ -84,7 +84,8 @@ public class Run {
         EntradaCarregador entradaCarregador = ligador.liga(entradasLigador);
         
         Carregador carregador = new Carregador(entradaCarregador);
-        ProgramList lista = carregador.carrega();
+        carregador.carrega("file.bin");
+        //ProgramList lista = new ProgramList(carregador.getEntradaCarregador().getEnderecoInicial());
         
         /*String arquivo = "/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/program.bin";
         int offset = 500, pc; // definido pelo carregador

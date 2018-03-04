@@ -139,6 +139,8 @@ public class Ligador {
                                 
         entradaCarregador.setSaida(intrucoesAssemblerGeral);
         entradaCarregador.setTabelaDeDefinicoes(tabelaDefinicaoGlobal);
+        entradaCarregador.setEnderecoInicial(entradasLigador.get(0).getEnderecoInicial());
+        
         return entradaCarregador;        
     }
 
@@ -158,7 +160,14 @@ public class Ligador {
                     contador += 3;
                     break;
                 case "1100":
-                    contador += 2;
+                    if(!"111".equals(intrucoesAssemblerGeral.get(i).getOP2())){
+                        //jmp
+                        contador += 2;
+                    }
+                    else{
+                        //ret
+                        contador += 1;
+                    }                    
                     break;
                 case "0100":
                     contador += 2;
