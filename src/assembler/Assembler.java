@@ -28,7 +28,7 @@ public class Assembler {
         this.actAddress = 0;
         
         try{
-            BufferedReader file = new BufferedReader(new FileReader("LC3Monted.txt"));
+            BufferedReader file = new BufferedReader(new FileReader("../LC3Monted.txt"));
             
             String line = file.readLine();
             while(line != null){

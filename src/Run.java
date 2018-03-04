@@ -3,6 +3,7 @@ import assembler.EntradaLigador;
 import assembler.InstrucaoAssembler;
 import assembler.Ligador;
 import assembler.ProcessadorMacro;
+import assembler.Assembler;
 import machine.*;
 import constants.Constants;
 import java.util.ArrayList;
@@ -21,10 +22,11 @@ public class Run {
      */
    public static void main(String[] args)
     {
-        
+    
         ProcessadorMacro pr = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro.txt");
         pr.printExpanded();
         
+        Assembler ass = new Assembler();
         
         InstrucaoAssembler mod1Inst1 = new InstrucaoAssembler("label1", "LD", "R0", "X", "");
         InstrucaoAssembler mod1Inst2 = new InstrucaoAssembler("label2", "LD", "R1", "Y", "");

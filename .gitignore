@@ -27,3 +27,6 @@ build.xml
 manifest.mf
 nbproject
 /dist
+/netbeans/dist/
+/netbeans/build/
+/netbeans
