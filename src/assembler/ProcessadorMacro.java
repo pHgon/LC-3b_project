@@ -106,11 +106,15 @@ public class ProcessadorMacro {
     {
         return this.macroDef;
     }
+    /**
+     * 
+     * @return  Retorna saida da macro expandida.
+     */
     public String getSaidaExp()      
     {
         for(InstrucaoAssembler i : saida)
         {
-            macroExp = macroExp + i.getInstrucaoFULL();
+            macroExp = macroExp + i.getInstrucaoFULL() + "\n";
         }
         return macroExp;
     }
