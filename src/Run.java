@@ -24,10 +24,16 @@ public class Run {
    public static void main(String[] args)
     {
     
-        /*ProcessadorMacro pr = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro.txt");
-        pr.printExpanded();
+        // chama duas vezes o processador de macros, uma para cada modulo e retorna entrada para MONTADOR
+        ProcessadorMacro pr1 = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro.txt");
+        pr1.printExpanded();
+        ArrayList<InstrucaoAssembler> entradaMontador1 = pr1.getEntradaMontador();
+        ProcessadorMacro pr2 = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro.txt");
+        ArrayList<InstrucaoAssembler> entradaMontador2 = pr2.getEntradaMontador();
         
-        Assembler ass = new Assembler();*/
+        
+        
+        //Assembler ass = new Assembler();
         
         InstrucaoAssembler mod1Inst1 = new InstrucaoAssembler("label1", "LD", "R0", "X", "", "", "");
         InstrucaoAssembler mod1Inst2 = new InstrucaoAssembler("label2", "LD", "R1", "Y", "", "", "");        
