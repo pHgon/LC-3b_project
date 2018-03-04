@@ -98,9 +98,21 @@ public class ProcessadorMacro {
         
         
     }
+    /**
+     * 
+     * @return  Retorna buffer da macro definida
+     */
     public String getSaidaDef()
     {
         return this.macroDef;
+    }
+    public String getSaidaExp()      
+    {
+        for(InstrucaoAssembler i : saida)
+        {
+            macroExp = macroExp + i.getInstrucaoFULL();
+        }
+        return macroExp;
     }
     /**
      * Função de retorno de saida

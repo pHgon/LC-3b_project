@@ -29,12 +29,12 @@ public class Run {
         pr1.printExpanded();
         ArrayList<InstrucaoAssembler> entradaMontador1 = pr1.getEntradaMontador();
         System.out.println(pr1.getSaidaDef());
-        
+        System.out.println(pr1.getSaidaExp());
         ProcessadorMacro pr2 = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro2.txt");
         pr2.printExpanded();
         ArrayList<InstrucaoAssembler> entradaMontador2 = pr2.getEntradaMontador();
         System.out.println(pr2.getSaidaDef());
-        
+        System.out.println(pr2.getSaidaExp());
         /*Assembler ass1 = new Assembler(entradaMontador1);
         Assembler ass2 = new Assembler(entradaMontador1);
         ArrayList<EntradaLigador> entradaLigador = new ArrayList();
