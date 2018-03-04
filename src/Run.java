@@ -28,14 +28,14 @@ public class Run {
         
         Assembler ass = new Assembler();
         
-        InstrucaoAssembler mod1Inst1 = new InstrucaoAssembler("label1", "LD", "R0", "X", "");
-        InstrucaoAssembler mod1Inst2 = new InstrucaoAssembler("label2", "LD", "R1", "Y", "");
-        InstrucaoAssembler mod1Inst3 = new InstrucaoAssembler("Z", ".INTDEF", "33", "", "");
+        InstrucaoAssembler mod1Inst1 = new InstrucaoAssembler("label1", "LD", "R0", "X", "", "", "");
+        InstrucaoAssembler mod1Inst2 = new InstrucaoAssembler("label2", "LD", "R1", "Y", "", "", "");
+        InstrucaoAssembler mod1Inst3 = new InstrucaoAssembler("Z", ".INTDEF", "33", "", "", "", "");
         
-        InstrucaoAssembler mod2Inst1 = new InstrucaoAssembler("label3", "NOT", "R2", "R1", "");
-        InstrucaoAssembler mod2Inst2 = new InstrucaoAssembler("label4", "ADD", "R2", "R2", "Z");  
-        InstrucaoAssembler mod2Inst3 = new InstrucaoAssembler("X", ".INTDEF", "10", "", "");  
-        InstrucaoAssembler mod2Inst4 = new InstrucaoAssembler("Y", ".INTDEF", "40", "", "");  
+        InstrucaoAssembler mod2Inst1 = new InstrucaoAssembler("label3", "NOT", "R2", "R1", "", "", "");
+        InstrucaoAssembler mod2Inst2 = new InstrucaoAssembler("label4", "ADD", "R2", "R2", "Z", "", "");  
+        InstrucaoAssembler mod2Inst3 = new InstrucaoAssembler("X", ".INTDEF", "10", "", "", "", "");  
+        InstrucaoAssembler mod2Inst4 = new InstrucaoAssembler("Y", ".INTDEF", "40", "", "", "", "");  
         
         ArrayList<InstrucaoAssembler> mod1 = new ArrayList();
         ArrayList<InstrucaoAssembler> mod2 = new ArrayList();
