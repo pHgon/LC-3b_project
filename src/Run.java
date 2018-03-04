@@ -28,18 +28,18 @@ public class Run {
         ProcessadorMacro pr1 = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro.txt");
         pr1.printExpanded();
         ArrayList<InstrucaoAssembler> entradaMontador1 = pr1.getEntradaMontador();
-        for(InstrucaoAssembler a : entradaMontador1)
-        {
-           System.out.println(a.getInstrucaoFULL());
-        }
+     //   for(InstrucaoAssembler a : entradaMontador1)
+      //  {
+      //     System.out.println(a.getInstrucaoFULL());
+       // }
         
         ProcessadorMacro pr2 = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro.txt");
         pr2.printExpanded();
         ArrayList<InstrucaoAssembler> entradaMontador2 = pr2.getEntradaMontador();
-        for(InstrucaoAssembler a : entradaMontador2)
-        {
-           System.out.println(a.getInstrucaoFULL());
-        }
+       // for(InstrucaoAssembler a : entradaMontador2)
+      //  {
+        //   System.out.println(a.getInstrucaoFULL());
+       // }
         
         
         /*Assembler ass1 = new Assembler(entradaMontador1);
