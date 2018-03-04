@@ -52,6 +52,12 @@ public class Assembler {
         }
     }
     
+    public Assembler(ArrayList <InstrucaoAssembler> input){
+        for(int i=0; i<input.size(); i++){
+            System.out.println(input.get(i).getInstrucaoFULL());
+        }
+    }
+    
     private void setModule(String[] line){
         if(line[0].equals(".ORIG")){
             this.linkdate.setEnderecoInicial(Integer.parseInt(line[1]));
@@ -130,5 +136,11 @@ public class Assembler {
             System.out.printf("(%d-%s) ", i, line[i]);
         }
         System.out.println*/
+    }
+    
+    public EntradaLigador getOutput(){
+        this.linkdate.setSaida(this.instList);
+        this.linkdate.setTabelaDeSimbolo(this.symTable);
+        return this.linkdate;
     }
 }
