@@ -45,14 +45,21 @@ public class Ligador {
             for (String temp : entradasLigador.get(i).getTabelaDeSimbolo().keySet()) {
                 System.out.println(temp + " " + tabelaDeSimbolos.get(temp));
                 if(tabelaDeSimbolos.get(temp) != "null"){
-                    int address = Integer.parseInt((String) tabelaDeSimbolos.get(temp));
-                    tabelaDefinicaoGlobal.put(temp, Integer.toString(address + offsetModulos));   
+                    String value = (String) tabelaDeSimbolos.get(temp);
+                    if(value.indexOf('#') >= 0){
+                        tabelaDefinicaoGlobal.put(temp, value);      
+                    }
+                    else{
+                        int address = Integer.parseInt((String) value);                    
+                        tabelaDefinicaoGlobal.put(temp, Integer.toString(address + offsetModulos));      
+                    }                    
                 }                                
             }
             offsetModulos += entradasLigador.get(i).getNumEnderecos();            
         }
         System.out.println();
-
+        
+        System.out.println("instrucoes geral:");            
         for(int i = 0; i < intrucoesAssemblerGeral.size(); i++){
             System.out.println(intrucoesAssemblerGeral.get(i).getInstrucaoFULL());            
         }
@@ -63,76 +70,128 @@ public class Ligador {
             InstrucaoAssembler inst = intrucoesAssemblerGeral.get(i);
             if(tabelaDefinicaoGlobal.get(inst.getOP1()) != null ){
                 //existe o simbolo                
-                Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP1()));
-                pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
-
-                if(".INTDEF".equals(intrucoesAssemblerGeral.get(pos).getOperator())){
+                if((tabelaDefinicaoGlobal.get(inst.getOP1())).indexOf('#') >= 0){
                     //eh constante
-                    intrucoesAssemblerGeral.get(i).setOP1(intrucoesAssemblerGeral.get(pos).getOP1());
+                    intrucoesAssemblerGeral.get(i).setOP1(tabelaDefinicaoGlobal.get(inst.getOP1()));
                 }
                 else{
                     //eh label
+                    Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP1()));
+                    pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
                     intrucoesAssemblerGeral.get(i).setOP1(Integer.toString(pos));
                 }
             }
             if(tabelaDefinicaoGlobal.get(inst.getOP2()) != null ){
-                //existe o simbolo                
-                Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP2()));
-                pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
-                //System.out.println("OP2: " + inst.getOP2() + " Valor na Tabela: " + tabelaDefinicaoGlobal.get(inst.getOP2()) + " linha: " + pos);
-                if(".INTDEF".equals(intrucoesAssemblerGeral.get(pos).getOperator())){
+                //existe o simbolo                                                                
+                if((tabelaDefinicaoGlobal.get(inst.getOP2())).indexOf('#') >= 0){
                     //eh constante
-                    intrucoesAssemblerGeral.get(i).setOP2(intrucoesAssemblerGeral.get(pos).getOP1());
+                    intrucoesAssemblerGeral.get(i).setOP2(tabelaDefinicaoGlobal.get(inst.getOP2()));
                 }
                 else{
                     //eh label
+                    Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP2()));
+                    pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
                     intrucoesAssemblerGeral.get(i).setOP2(Integer.toString(pos));
                 }
             }
             if(tabelaDefinicaoGlobal.get(inst.getOP3()) != null ){
                 //existe o simbolo                
-                Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP3()));
-                pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
-
-                if(".INTDEF".equals(intrucoesAssemblerGeral.get(pos).getOperator())){
+                if((tabelaDefinicaoGlobal.get(inst.getOP3())).indexOf('#') >= 0){
                     //eh constante
-                    intrucoesAssemblerGeral.get(i).setOP3(intrucoesAssemblerGeral.get(pos).getOP1());
+                    intrucoesAssemblerGeral.get(i).setOP3(tabelaDefinicaoGlobal.get(inst.getOP3()));
                 }
                 else{
                     //eh label
+                    Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP3()));
+                    pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
                     intrucoesAssemblerGeral.get(i).setOP3(Integer.toString(pos));
+                }
+            }
+            if(tabelaDefinicaoGlobal.get(inst.getOP4()) != null ){
+                //existe o simbolo                
+                if((tabelaDefinicaoGlobal.get(inst.getOP4())).indexOf('#') >= 0){
+                    //eh constante
+                    intrucoesAssemblerGeral.get(i).setOP4(tabelaDefinicaoGlobal.get(inst.getOP4()));
+                }
+                else{
+                    //eh label
+                    Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP4()));
+                    pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
+                    intrucoesAssemblerGeral.get(i).setOP4(Integer.toString(pos));
+                }
+            }
+            if(tabelaDefinicaoGlobal.get(inst.getOP5()) != null ){
+                //existe o simbolo                
+                if((tabelaDefinicaoGlobal.get(inst.getOP5())).indexOf('#') >= 0){
+                    //eh constante
+                    intrucoesAssemblerGeral.get(i).setOP5(tabelaDefinicaoGlobal.get(inst.getOP5()));
+                }
+                else{
+                    //eh label
+                    Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP5()));
+                    pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
+                    intrucoesAssemblerGeral.get(i).setOP5(Integer.toString(pos));
                 }
             }
             
             System.out.println(intrucoesAssemblerGeral.get(i).getInstrucaoFULL());            
         }
-        
-        
-        System.out.println("\nTabela de Definições Global:\n");            
-        for (String temp : tabelaDefinicaoGlobal.keySet()) {
-            System.out.println(temp + " " + tabelaDefinicaoGlobal.get(temp));                
-        }
-        System.out.println();
-
-        
+                                
         entradaCarregador.setSaida(intrucoesAssemblerGeral);
         entradaCarregador.setTabelaDeDefinicoes(tabelaDefinicaoGlobal);
-        return entradaCarregador;
+        return entradaCarregador;        
     }
 
     private Integer contarLinhas(ArrayList<InstrucaoAssembler> intrucoesAssemblerGeral, Integer pos) {
         int temp = 0, contador = 0;
         for(int i = 0; i < intrucoesAssemblerGeral.size(); i++){            
-            contador++;
-            if(intrucoesAssemblerGeral.get(i).getOP1() != null && !intrucoesAssemblerGeral.get(i).getOP1().isEmpty()){
-                contador++;
-            }
-            if(intrucoesAssemblerGeral.get(i).getOP2() != null && !intrucoesAssemblerGeral.get(i).getOP2().isEmpty()){
-                contador++;
-            }
-            if(intrucoesAssemblerGeral.get(i).getOP3() != null && !intrucoesAssemblerGeral.get(i).getOP3().isEmpty()){
-                contador++;
-            }
+            contador++;            
+                        
+            switch(intrucoesAssemblerGeral.get(i).getOperator()){
+                case "0001":
+                    contador += 4;
+                    break;
+                case "0101":
+                    contador += 4;
+                    break;
+                case "0000":
+                    contador += 3;
+                    break;
+                case "1100":
+                    contador += 2;
+                    break;
+                case "0100":
+                    contador += 2;
+                    break;                    
+                case "1001":
+                    contador += 3;
+                    break;            
+                case "0010":
+                    contador += 4;
+                    break;      
+                case "1010":
+                    contador += 4;
+                    break;  
+                case "0110":
+                    contador += 4;
+                    break;  
+                case "1110":
+                    contador += 3;
+                    break;              
+                case "1101":
+                    contador += 4;
+                    break; 
+                case "0011":
+                    contador += 4;
+                    break; 
+                case "1011":
+                    contador += 4;
+                    break;                 
+                case "0111":
+                    contador += 4;
+                    break;           
+            }        
+            
             temp++;
             if(contador >= pos){
                 break;
