@@ -111,18 +111,18 @@ public class Assembler {
 
         switch(line.length){
             case 2:
-                this.instList.add(new InstrucaoAssembler(line[0], line[1], "", "", ""));
+                this.instList.add(new InstrucaoAssembler(line[0], line[1], "", "", "","",""));
                 break;
             case 3:
-                this.instList.add(new InstrucaoAssembler(line[0], line[1], line[2], "", ""));
+                this.instList.add(new InstrucaoAssembler(line[0], line[1], line[2], "", "", "", ""));
                 this.actAddress+=1;
                 break;
             case 4:
-                this.instList.add(new InstrucaoAssembler(line[0], line[1], line[2], line[3], ""));
+                this.instList.add(new InstrucaoAssembler(line[0], line[1], line[2], line[3], "", "", ""));
                 this.actAddress+=2;
                 break;
             default:
-                this.instList.add(new InstrucaoAssembler(line[0], line[1], line[2], line[3], line[4]));
+                this.instList.add(new InstrucaoAssembler(line[0], line[1], line[2], line[3], line[4], "", ""));
                 this.actAddress+=3;
         }
         /*System.out.printf("%s\t", line.length);

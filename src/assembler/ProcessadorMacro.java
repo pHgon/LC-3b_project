@@ -42,11 +42,11 @@ public class ProcessadorMacro {
                 switch(partes[0])
                 {
                     case ".ORIG":
-                        InstrucaoAssembler comeco = new InstrucaoAssembler(linha,"","","","");
+                        InstrucaoAssembler comeco = new InstrucaoAssembler(linha,"","","","", "", "");
                         saida.add(comeco);
                         break;
                     case ".END":
-                        InstrucaoAssembler fim = new InstrucaoAssembler(linha,"","","","");
+                        InstrucaoAssembler fim = new InstrucaoAssembler(linha,"","","","", "", "");
                         saida.add(fim);
                         break;
                     case "":
@@ -74,7 +74,7 @@ public class ProcessadorMacro {
                             {
                                 copia[i] = splitOut[i];
                             }
-                            InstrucaoAssembler expndedMacro = new InstrucaoAssembler(copia[0],copia[1],copia[2],copia[3],copia[4]);
+                            InstrucaoAssembler expndedMacro = new InstrucaoAssembler(copia[0],copia[1],copia[2],copia[3],copia[4], "", "");
                             saida.add(expndedMacro); 
                         }                                                        
                        break;
@@ -175,7 +175,7 @@ public class ProcessadorMacro {
                 {
                     copia[i] = splitOut[i];
                 }
-                InstrucaoAssembler expndedMacro = new InstrucaoAssembler(copia[0],copia[1],copia[2],copia[3],copia[4]);
+                InstrucaoAssembler expndedMacro = new InstrucaoAssembler(copia[0],copia[1],copia[2],copia[3],copia[4],"","");
                 saida.add(expndedMacro);
                     
                 out = aux.getInstruct();
