@@ -23,31 +23,25 @@ public class Run {
    public static void main(String[] args)
     {
     
-        ProcessadorMacro pr = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro.txt");
+        /*ProcessadorMacro pr = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro.txt");
         pr.printExpanded();
         
-        Assembler ass = new Assembler();
+        Assembler ass = new Assembler();*/
         
-        InstrucaoAssembler mod1Inst1 = new InstrucaoAssembler("label1", "LD", "R0", "X", "");
-        InstrucaoAssembler mod1Inst2 = new InstrucaoAssembler("label2", "LD", "R1", "Y", "");
-        InstrucaoAssembler mod1Inst3 = new InstrucaoAssembler("Z", ".INTDEF", "33", "", "");
+        InstrucaoAssembler mod1Inst1 = new InstrucaoAssembler("label1", "LD", "R0", "X", "", "", "");
+        InstrucaoAssembler mod1Inst2 = new InstrucaoAssembler("label2", "LD", "R1", "Y", "", "", "");        
         
-        InstrucaoAssembler mod2Inst1 = new InstrucaoAssembler("label3", "NOT", "R2", "R1", "");
-        InstrucaoAssembler mod2Inst2 = new InstrucaoAssembler("label4", "ADD", "R2", "R2", "Z");  
-        InstrucaoAssembler mod2Inst3 = new InstrucaoAssembler("X", ".INTDEF", "10", "", "");  
-        InstrucaoAssembler mod2Inst4 = new InstrucaoAssembler("Y", ".INTDEF", "40", "", "");  
+        InstrucaoAssembler mod2Inst1 = new InstrucaoAssembler("label3", "NOT", "R2", "R1", "", "", "");
+        InstrucaoAssembler mod2Inst2 = new InstrucaoAssembler("label4", "ADD", "R2", "R2", "Z", "", "");          
         
         ArrayList<InstrucaoAssembler> mod1 = new ArrayList();
         ArrayList<InstrucaoAssembler> mod2 = new ArrayList();
         
         mod1.add(mod1Inst1);
         mod1.add(mod1Inst2);
-        mod1.add(mod1Inst3);
-        
+              
         mod2.add(mod2Inst1);
-        mod2.add(mod2Inst2);
-        mod2.add(mod2Inst3);
-        mod2.add(mod2Inst4);
+        mod2.add(mod2Inst2);       
         
         Map<String, String> tabelaDeSimbolo1 = new HashMap<>();
         Map<String, String> tabelaDeSimbolo2 = new HashMap<>();
@@ -55,14 +49,14 @@ public class Run {
         tabelaDeSimbolo1.put("label1", Integer.toString(0));
         tabelaDeSimbolo1.put("X", "null");
         tabelaDeSimbolo1.put("label2", Integer.toString(3));
-        tabelaDeSimbolo1.put("Z", Integer.toString(6));
+        tabelaDeSimbolo1.put("Z", "#33");
         
         
         tabelaDeSimbolo2.put("label3", Integer.toString(0));
         tabelaDeSimbolo2.put("label4", Integer.toString(3));
         tabelaDeSimbolo2.put("Z", "null");
-        tabelaDeSimbolo2.put("X", Integer.toString(7));
-        tabelaDeSimbolo2.put("Y", Integer.toString(9));
+        tabelaDeSimbolo2.put("X", "#10");
+        tabelaDeSimbolo2.put("Y", "#40");
         
         
         EntradaLigador entradaLigador1 = new EntradaLigador();
@@ -82,7 +76,7 @@ public class Run {
         Ligador ligador = new Ligador();
         EntradaCarregador entradaCarregador = ligador.liga(entradasLigador);
         
-        String arquivo = "/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/program.bin";
+        /*String arquivo = "/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/program.bin";
         int offset = 500, pc; // definido pelo carregador
         ProgramList lista = new ProgramList(offset);
         lista.geraPrograma(arquivo);
@@ -107,7 +101,7 @@ public class Run {
         }        
                 
         System.out.println("PC: " + pc);
-        System.out.println(proc);
+        System.out.println(proc);*/
 
    }
 }
