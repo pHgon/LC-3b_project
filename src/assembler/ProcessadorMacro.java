@@ -87,7 +87,7 @@ public class ProcessadorMacro {
                        break;
                 }
                 linha = br.readLine();
-                macroDef = macroDef + linha + "\n";
+                if(linha != null) macroDef = macroDef + linha + "\n";
             
             }
             
