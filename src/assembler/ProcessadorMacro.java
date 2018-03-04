@@ -156,7 +156,7 @@ public class ProcessadorMacro {
      */
     private void ExpantionMode(String linha)
     {
-        System.out.println("entrou expation");
+        //System.out.println("entrou expation");
         String[] temp = linha.split("\\t");
         Macro aux = FindMacro(temp[1]);
         if(aux != null)
@@ -165,7 +165,7 @@ public class ProcessadorMacro {
             while(out != null)
             {
                 String[] splitOut = out.split("\\t");
-                System.out.println("splitou macro");
+                //System.out.println("splitou macro");
                 for(int i = 2 ; i < splitOut.length ;  i++)
                 {
                     if(aux.checkParam(splitOut[i]))
