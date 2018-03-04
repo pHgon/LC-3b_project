@@ -91,6 +91,14 @@ public class ProcessadorMacro {
         
     }
     /**
+     * Função de retorno de saida
+     * @return arraylist < instrucaoAssembler>
+     */
+    public ArrayList getEntradaMontador()
+    {
+        return this.saida;
+    }
+    /**
      * 
      * @param nome
      * @return true se macro ja foi definida
