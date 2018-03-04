@@ -34,6 +34,12 @@ public class JFrame extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        registrerLabel1 = new javax.swing.JLabel();
+        registrerLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         inicialMemoryTextArea = new javax.swing.JTextArea();
@@ -76,18 +82,52 @@ public class JFrame extends javax.swing.JFrame {
             }
         });
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane7.setViewportView(jTextArea1);
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane8.setViewportView(jTextArea2);
+
+        registrerLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        registrerLabel1.setText("Macros Definidas");
+
+        registrerLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        registrerLabel2.setText("Macros Expandidas");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1235, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(registrerLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(registrerLabel2)
+                .addGap(200, 200, 200))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 808, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(registrerLabel1)
+                    .addComponent(registrerLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab3", jPanel2);
+        jTabbedPane1.addTab("Processador de Macros", jPanel2);
 
         inicialMemoryTextArea.setColumns(20);
         inicialMemoryTextArea.setRows(5);
@@ -209,6 +249,8 @@ public class JFrame extends javax.swing.JFrame {
                 .addComponent(jTabbedPane1))
         );
 
+        jTabbedPane1.getAccessibleContext().setAccessibleName("ProcessadorMacros");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -319,13 +361,19 @@ public class JFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel lc3Label;
     private javax.swing.JTextArea log2TextArea;
     private javax.swing.JTextArea logTextArea;
     private javax.swing.JTextArea mem1;
     private javax.swing.JLabel memoryLabel;
     private javax.swing.JLabel registrerLabel;
+    private javax.swing.JLabel registrerLabel1;
+    private javax.swing.JLabel registrerLabel2;
     private javax.swing.JTextArea regsTextArea;
     // End of variables declaration//GEN-END:variables
 }

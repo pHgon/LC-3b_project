@@ -175,7 +175,7 @@ public class ProcessadorMacro {
                 {
                     copia[i] = splitOut[i];
                 }
-                InstrucaoAssembler expndedMacro = new InstrucaoAssembler(copia[0],copia[1],copia[2],copia[3],copia[4]);
+                InstrucaoAssembler expndedMacro = new InstrucaoAssembler(copia[0],copia[1],copia[2],copia[3],copia[4],"","");
                 saida.add(expndedMacro);
                     
                 out = aux.getInstruct();
