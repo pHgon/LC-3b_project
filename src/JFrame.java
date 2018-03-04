@@ -3,8 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import assembler.Carregador;
+import assembler.EntradaCarregador;
+import assembler.EntradaLigador;
+import assembler.InstrucaoAssembler;
+import assembler.Ligador;
+import assembler.ProcessadorMacro;
 import machine.*;
 import constants.Constants;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -29,22 +38,22 @@ public class JFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lc3Label = new javax.swing.JLabel();
+        LC3bLabel = new javax.swing.JLabel();
         btnRun = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel2Macros = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        MacroExpandidaTextArea = new javax.swing.JTextArea();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        MacroDefinidaTextArea = new javax.swing.JTextArea();
         registrerLabel1 = new javax.swing.JLabel();
         registrerLabel2 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelMaquina = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         inicialMemoryTextArea = new javax.swing.JTextArea();
         memoryLabel = new javax.swing.JLabel();
-        registrerLabel = new javax.swing.JLabel();
+        registerLabel = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         regsTextArea = new javax.swing.JTextArea();
         consoleLabel = new javax.swing.JLabel();
@@ -56,15 +65,17 @@ public class JFrame extends javax.swing.JFrame {
         finalMemoryTextArea = new javax.swing.JTextArea();
         jScrollPane6 = new javax.swing.JScrollPane();
         mem1 = new javax.swing.JTextArea();
+        memFinalLabel = new javax.swing.JLabel();
+        memInicialLabel = new javax.swing.JLabel();
+        jPanelLigadorCarregador = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lc3Label.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lc3Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lc3Label.setText("Simulador LC3-b");
-        lc3Label.setPreferredSize(new java.awt.Dimension(164, 29));
+        LC3bLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LC3bLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LC3bLabel.setText("Simulador LC3-b");
+        LC3bLabel.setPreferredSize(new java.awt.Dimension(164, 29));
 
         btnRun.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnRun.setText("Executar");
@@ -82,13 +93,13 @@ public class JFrame extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane7.setViewportView(jTextArea1);
+        MacroExpandidaTextArea.setColumns(20);
+        MacroExpandidaTextArea.setRows(5);
+        jScrollPane7.setViewportView(MacroExpandidaTextArea);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane8.setViewportView(jTextArea2);
+        MacroDefinidaTextArea.setColumns(20);
+        MacroDefinidaTextArea.setRows(5);
+        jScrollPane8.setViewportView(MacroDefinidaTextArea);
 
         registrerLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         registrerLabel1.setText("Macros Definidas");
@@ -96,38 +107,36 @@ public class JFrame extends javax.swing.JFrame {
         registrerLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         registrerLabel2.setText("Macros Expandidas");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(registrerLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(registrerLabel2)
-                .addGap(200, 200, 200))
+        javax.swing.GroupLayout jPanel2MacrosLayout = new javax.swing.GroupLayout(jPanel2Macros);
+        jPanel2Macros.setLayout(jPanel2MacrosLayout);
+        jPanel2MacrosLayout.setHorizontalGroup(
+            jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2MacrosLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(registrerLabel1)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(registrerLabel2))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+        jPanel2MacrosLayout.setVerticalGroup(
+            jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2MacrosLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(registrerLabel1)
                     .addComponent(registrerLabel2))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Processador de Macros", jPanel2);
+        jTabbedPane1.addTab("Processador de Macros", jPanel2Macros);
 
         inicialMemoryTextArea.setColumns(20);
         inicialMemoryTextArea.setRows(5);
@@ -136,8 +145,8 @@ public class JFrame extends javax.swing.JFrame {
         memoryLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         memoryLabel.setText("Memória teste");
 
-        registrerLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        registrerLabel.setText("Registradores");
+        registerLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        registerLabel.setText("Registradores");
 
         regsTextArea.setColumns(20);
         regsTextArea.setRows(5);
@@ -162,75 +171,97 @@ public class JFrame extends javax.swing.JFrame {
         mem1.setRows(5);
         jScrollPane6.setViewportView(mem1);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Memória Final");
+        memFinalLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        memFinalLabel.setText("Memória Final");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setText("Memória Inicial");
+        memInicialLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        memInicialLabel.setText("Memória Inicial");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelMaquinaLayout = new javax.swing.GroupLayout(jPanelMaquina);
+        jPanelMaquina.setLayout(jPanelMaquinaLayout);
+        jPanelMaquinaLayout.setHorizontalGroup(
+            jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMaquinaLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                    .addComponent(registrerLabel)
-                    .addComponent(jLabel2)
+                    .addComponent(registerLabel)
+                    .addComponent(memInicialLabel)
                     .addComponent(jScrollPane6))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelMaquinaLayout.createSequentialGroup()
+                        .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(memoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(consoleLabel)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanelMaquinaLayout.createSequentialGroup()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1))
+                    .addComponent(memFinalLabel))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(registrerLabel)
+        jPanelMaquinaLayout.setVerticalGroup(
+            jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMaquinaLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(registerLabel)
                     .addComponent(consoleLabel)
                     .addComponent(memoryLabel))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(memInicialLabel)
+                    .addComponent(memFinalLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Máquina", jPanel1);
+        jTabbedPane1.addTab("Máquina", jPanelMaquina);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Apenas Um teste");
+
+        javax.swing.GroupLayout jPanelLigadorCarregadorLayout = new javax.swing.GroupLayout(jPanelLigadorCarregador);
+        jPanelLigadorCarregador.setLayout(jPanelLigadorCarregadorLayout);
+        jPanelLigadorCarregadorLayout.setHorizontalGroup(
+            jPanelLigadorCarregadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLigadorCarregadorLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(957, Short.MAX_VALUE))
+        );
+        jPanelLigadorCarregadorLayout.setVerticalGroup(
+            jPanelLigadorCarregadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLigadorCarregadorLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(722, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Ligador/Carregador", jPanelLigadorCarregador);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1240, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(223, 223, 223)
-                .addComponent(lc3Label, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LC3bLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66)
                 .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -242,7 +273,7 @@ public class JFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lc3Label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LC3bLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -257,11 +288,81 @@ public class JFrame extends javax.swing.JFrame {
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
         // TODO add your handling code here:
        
-        String arquivo = "/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/program.bin";
+        //coisas que estavam no run
+        String arquivo = "D:/Biblioteca/Documentos/ProjetosJava/LC-3b_project/program.bin";
         int offset = 500, pc; // definido pelo carregador
         ProgramList lista = new ProgramList(offset);
         lista.geraPrograma(arquivo);
         
+        // chama duas vezes o processador de macros, uma para cada modulo e retorna entrada para MONTADOR
+        ProcessadorMacro pr1 = new ProcessadorMacro("D:/Biblioteca/Documentos/ProjetosJava/LC-3b_project/LC3EntradaProcMacro.txt");
+        pr1.printExpanded();
+        ArrayList<InstrucaoAssembler> entradaMontador1 = pr1.getEntradaMontador();
+        for(InstrucaoAssembler a : entradaMontador1)
+        {
+           System.out.println(a.getInstrucaoFULL());
+        }
+        
+        ProcessadorMacro pr2 = new ProcessadorMacro("D:/Biblioteca/Documentos/ProjetosJava/LC-3b_project/LC3EntradaProcMacro.txt");
+        pr2.printExpanded();
+        ArrayList<InstrucaoAssembler> entradaMontador2 = pr2.getEntradaMontador();
+        for(InstrucaoAssembler a : entradaMontador2)
+        {
+           System.out.println(a.getInstrucaoFULL());
+        }
+        
+        InstrucaoAssembler mod1Inst1 = new InstrucaoAssembler("label1", "LD", "R0", "X", "", "", "");
+        InstrucaoAssembler mod1Inst2 = new InstrucaoAssembler("label2", "LD", "R1", "Y", "", "", "");        
+        
+        InstrucaoAssembler mod2Inst1 = new InstrucaoAssembler("label3", "NOT", "R2", "R1", "", "", "");
+        InstrucaoAssembler mod2Inst2 = new InstrucaoAssembler("label4", "ADD", "R2", "R2", "Z", "", "");          
+        
+        ArrayList<InstrucaoAssembler> mod1 = new ArrayList();
+        ArrayList<InstrucaoAssembler> mod2 = new ArrayList();
+        
+        mod1.add(mod1Inst1);
+        mod1.add(mod1Inst2);
+              
+        mod2.add(mod2Inst1);
+        mod2.add(mod2Inst2);       
+        
+        Map<String, String> tabelaDeSimbolo1 = new HashMap<>();
+        Map<String, String> tabelaDeSimbolo2 = new HashMap<>();
+        
+        tabelaDeSimbolo1.put("label1", Integer.toString(0));
+        tabelaDeSimbolo1.put("X", "null");
+        tabelaDeSimbolo1.put("label2", Integer.toString(3));
+        tabelaDeSimbolo1.put("Z", "#33");
+        
+        
+        tabelaDeSimbolo2.put("label3", Integer.toString(0));
+        tabelaDeSimbolo2.put("label4", Integer.toString(3));
+        tabelaDeSimbolo2.put("Z", "null");
+        tabelaDeSimbolo2.put("X", "#10");
+        tabelaDeSimbolo2.put("Y", "#40");
+        
+        
+        EntradaLigador entradaLigador1 = new EntradaLigador();
+        EntradaLigador entradaLigador2 = new EntradaLigador();       
+        entradaLigador1.setSaida(mod1);
+        entradaLigador1.setTabelaDeSimbolo(tabelaDeSimbolo1);
+        entradaLigador2.setSaida(mod2);
+        entradaLigador2.setTabelaDeSimbolo(tabelaDeSimbolo2);
+        entradaLigador1.contarEnderecos();
+        entradaLigador2.contarEnderecos();
+        
+        ArrayList<EntradaLigador> entradasLigador = new ArrayList();
+        entradasLigador.add(entradaLigador1);
+        entradasLigador.add(entradaLigador2);
+                
+        
+        Ligador ligador = new Ligador();
+        EntradaCarregador entradaCarregador = ligador.liga(entradasLigador);
+        
+        Carregador carregador = new Carregador(entradaCarregador);
+        carregador.carrega("file.bin");
+       //----------------------------------------------------------------- 
+       
         String saida = null;
         saida = lista.PrintIntrucao();
         logTextArea.setText( saida + "\n" );
@@ -346,15 +447,18 @@ public class JFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LC3bLabel;
+    private javax.swing.JTextArea MacroDefinidaTextArea;
+    private javax.swing.JTextArea MacroExpandidaTextArea;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnRun;
     private javax.swing.JLabel consoleLabel;
     private javax.swing.JTextArea finalMemoryTextArea;
     private javax.swing.JTextArea inicialMemoryTextArea;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel2Macros;
+    private javax.swing.JPanel jPanelLigadorCarregador;
+    private javax.swing.JPanel jPanelMaquina;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -364,14 +468,13 @@ public class JFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JLabel lc3Label;
     private javax.swing.JTextArea log2TextArea;
     private javax.swing.JTextArea logTextArea;
     private javax.swing.JTextArea mem1;
+    private javax.swing.JLabel memFinalLabel;
+    private javax.swing.JLabel memInicialLabel;
     private javax.swing.JLabel memoryLabel;
-    private javax.swing.JLabel registrerLabel;
+    private javax.swing.JLabel registerLabel;
     private javax.swing.JLabel registrerLabel1;
     private javax.swing.JLabel registrerLabel2;
     private javax.swing.JTextArea regsTextArea;
