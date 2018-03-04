@@ -29,7 +29,7 @@ public class InstrucaoAssembler {
      * @param OP4  Operando 4
      * @param OP5  Operando 5
      */
-    public InstrucaoAssembler(String l, String Oper, String OP1, String OP2, String OP3)
+    public InstrucaoAssembler(String l, String Oper, String OP1, String OP2, String OP3, String OP4, String OP5)
     {
         this.label = l;
         this.Operator = Oper;
