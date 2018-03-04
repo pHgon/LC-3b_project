@@ -4,6 +4,7 @@ import assembler.InstrucaoAssembler;
 import assembler.Ligador;
 import assembler.ProcessadorMacro;
 import assembler.Assembler;
+import assembler.Carregador;
 import machine.*;
 import constants.Constants;
 import java.util.ArrayList;
@@ -75,6 +76,9 @@ public class Run {
         
         Ligador ligador = new Ligador();
         EntradaCarregador entradaCarregador = ligador.liga(entradasLigador);
+        
+        Carregador carregador = new Carregador(entradaCarregador);
+        ProgramList lista = carregador.carrega();
         
         /*String arquivo = "/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/program.bin";
         int offset = 500, pc; // definido pelo carregador
