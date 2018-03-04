@@ -34,7 +34,7 @@ public class ProcessadorMacro {
         //ler arquivo.
         try(BufferedReader br =  new BufferedReader(new FileReader("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/" +nomeArquivo)))
         {
-            String linha = br.readLine(); // char *line = while(getline(&line,&len,fp) != 1 && fp == EOF) char *nome = catalago->nome char *valor = catalogo->valor
+            String linha = br.readLine(); 
             while(linha != null)
             {
                 String partes[] = linha.split("\\t");

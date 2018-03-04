@@ -26,7 +26,7 @@ public class Run {
         pr.printExpanded();
         
         
-        /*InstrucaoAssembler mod1Inst1 = new InstrucaoAssembler("label1", "LD", "R0", "X", "");
+        InstrucaoAssembler mod1Inst1 = new InstrucaoAssembler("label1", "LD", "R0", "X", "");
         InstrucaoAssembler mod1Inst2 = new InstrucaoAssembler("label2", "LD", "R1", "Y", "");
         InstrucaoAssembler mod1Inst3 = new InstrucaoAssembler("Z", ".INTDEF", "33", "", "");
         
@@ -79,8 +79,8 @@ public class Run {
         
         Ligador ligador = new Ligador();
         EntradaCarregador entradaCarregador = ligador.liga(entradasLigador);
-        */
-        /*String arquivo = "/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/program.bin";
+        
+        String arquivo = "/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/program.bin";
         int offset = 500, pc; // definido pelo carregador
         ProgramList lista = new ProgramList(offset);
         lista.geraPrograma(arquivo);
@@ -105,7 +105,7 @@ public class Run {
         }        
                 
         System.out.println("PC: " + pc);
-        System.out.println(proc);*/
+        System.out.println(proc);
 
    }
 }
