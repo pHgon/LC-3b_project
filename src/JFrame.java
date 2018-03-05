@@ -387,7 +387,7 @@ public class JFrame extends javax.swing.JFrame {
         
         String arquivo = "D:/Biblioteca/Documentos/ProjetosJava/LC-3b_project/program.bin";
         int offset = 500, pc; // definido pelo carregador
-        ProgramList lista = new ProgramList(offset);
+        ProgramList lista = new ProgramList();
         lista.geraPrograma(arquivo);
         
         // chama duas vezes o processador de macros, uma para cada modulo e retorna entrada para MONTADOR

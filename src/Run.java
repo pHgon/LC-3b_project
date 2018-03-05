@@ -25,7 +25,7 @@ public class Run {
     {
     
         // chama duas vezes o processador de macros, uma para cada modulo e retorna entrada para MONTADOR
-        ProcessadorMacro pr1 = new ProcessadorMacro("LC3EntradaProcMacro.txt");
+        ProcessadorMacro pr1 = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro.txt");
         //pr1.printExpanded();
         ArrayList<InstrucaoAssembler> entradaMontador1 = pr1.getEntradaMontador();
         /*for(InstrucaoAssembler a : entradaMontador1)
@@ -33,7 +33,7 @@ public class Run {
            System.out.println(a.getInstrucaoFULL());
         }*/
         
-        ProcessadorMacro pr2 = new ProcessadorMacro("LC3EntradaProcMacro2.txt");
+        ProcessadorMacro pr2 = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro2.txt");
         //pr1.printExpanded();
         //System.out.println(pr1.getSaidaDef());
         //System.out.println(pr1.getSaidaExp());
@@ -90,10 +90,6 @@ public class Run {
                
         // Inicia Memória e testa alguns valores        
         Memory mem = new Memory(c.MEM_SIZE);
-        mem.setByte(0, 127);
-        mem.setByte(1, -128);
-        mem.setWord(2, 32767);
-        mem.setWord(4, -32768);
         System.out.println("\n" + mem.getByte(0) + " " + mem.getByte(1));
         System.out.println(mem.getWord(2) + " " + mem.getWord(4) + "\n");
 

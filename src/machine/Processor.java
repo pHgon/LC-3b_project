@@ -254,7 +254,7 @@ public class Processor {
         int dr;
         short offset;
         dr = tuple.t1;
-        offset = (short) ((tuple.t2 << 1) + pc + 1);
+        offset = (short) ((tuple.t2) );
         buffer = this.buffer +  "DR: " + Integer.toString(tuple.t1) + "\n" +
                                 "OFFSET: " + Integer.toString(tuple.t2) + "\n\n" ;
         
