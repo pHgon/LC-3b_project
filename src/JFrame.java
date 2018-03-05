@@ -43,12 +43,16 @@ public class JFrame extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2Macros = new javax.swing.JPanel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        MacroExpandidaTextArea = new javax.swing.JTextArea();
         jScrollPane8 = new javax.swing.JScrollPane();
         MacroDefinidaTextArea = new javax.swing.JTextArea();
         registrerLabel1 = new javax.swing.JLabel();
         registrerLabel2 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        MacroDefinidaTextArea2 = new javax.swing.JTextArea();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        MacroExpandidaTextArea2 = new javax.swing.JTextArea();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        MacroExpandidaTextArea = new javax.swing.JTextArea();
         jPanelMaquina = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         inicialMemoryTextArea = new javax.swing.JTextArea();
@@ -93,10 +97,6 @@ public class JFrame extends javax.swing.JFrame {
             }
         });
 
-        MacroExpandidaTextArea.setColumns(20);
-        MacroExpandidaTextArea.setRows(5);
-        jScrollPane7.setViewportView(MacroExpandidaTextArea);
-
         MacroDefinidaTextArea.setColumns(20);
         MacroDefinidaTextArea.setRows(5);
         jScrollPane8.setViewportView(MacroDefinidaTextArea);
@@ -107,33 +107,55 @@ public class JFrame extends javax.swing.JFrame {
         registrerLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         registrerLabel2.setText("Macros Expandidas");
 
+        MacroDefinidaTextArea2.setColumns(20);
+        MacroDefinidaTextArea2.setRows(5);
+        jScrollPane9.setViewportView(MacroDefinidaTextArea2);
+
+        MacroExpandidaTextArea2.setColumns(20);
+        MacroExpandidaTextArea2.setRows(5);
+        jScrollPane11.setViewportView(MacroExpandidaTextArea2);
+
+        MacroExpandidaTextArea.setColumns(20);
+        MacroExpandidaTextArea.setRows(5);
+        jScrollPane12.setViewportView(MacroExpandidaTextArea);
+
         javax.swing.GroupLayout jPanel2MacrosLayout = new javax.swing.GroupLayout(jPanel2Macros);
         jPanel2Macros.setLayout(jPanel2MacrosLayout);
         jPanel2MacrosLayout.setHorizontalGroup(
             jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2MacrosLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(registrerLabel1)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                    .addComponent(jScrollPane9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(registrerLabel2))
-                .addContainerGap(262, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2MacrosLayout.createSequentialGroup()
+                        .addComponent(registrerLabel2)
+                        .addGap(252, 252, 252))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2MacrosLayout.createSequentialGroup()
+                        .addGroup(jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35))))
         );
         jPanel2MacrosLayout.setVerticalGroup(
             jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2MacrosLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addGroup(jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(registrerLabel1)
-                    .addComponent(registrerLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addGroup(jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(registrerLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(registrerLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                    .addComponent(jScrollPane8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(jPanel2MacrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
 
         jTabbedPane1.addTab("Processador de Macros", jPanel2Macros);
@@ -184,26 +206,24 @@ public class JFrame extends javax.swing.JFrame {
             .addGroup(jPanelMaquinaLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                     .addComponent(registerLabel)
                     .addComponent(memInicialLabel)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                     .addComponent(jScrollPane6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(memFinalLabel)
                     .addGroup(jPanelMaquinaLayout.createSequentialGroup()
-                        .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(memoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(memoryLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(consoleLabel)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelMaquinaLayout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(memFinalLabel))
-                .addContainerGap(24, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(35, 35, 35))
         );
         jPanelMaquinaLayout.setVerticalGroup(
             jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,15 +239,15 @@ public class JFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(memInicialLabel)
-                    .addComponent(memFinalLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(memFinalLabel))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelMaquinaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5)
+                    .addComponent(jScrollPane6))
+                .addGap(20, 20, 20))
         );
 
         jTabbedPane1.addTab("Máquina", jPanelMaquina);
@@ -242,14 +262,14 @@ public class JFrame extends javax.swing.JFrame {
             .addGroup(jPanelLigadorCarregadorLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(957, Short.MAX_VALUE))
+                .addContainerGap(811, Short.MAX_VALUE))
         );
         jPanelLigadorCarregadorLayout.setVerticalGroup(
             jPanelLigadorCarregadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLigadorCarregadorLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(722, Short.MAX_VALUE))
+                .addContainerGap(609, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ligador/Carregador", jPanelLigadorCarregador);
@@ -258,7 +278,7 @@ public class JFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1240, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(223, 223, 223)
                 .addComponent(LC3bLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,7 +308,7 @@ public class JFrame extends javax.swing.JFrame {
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
         // TODO add your handling code here:
        
-        //coisas que estavam no run
+        
         String arquivo = "D:/Biblioteca/Documentos/ProjetosJava/LC-3b_project/program.bin";
         int offset = 500, pc; // definido pelo carregador
         ProgramList lista = new ProgramList(offset);
@@ -298,18 +318,25 @@ public class JFrame extends javax.swing.JFrame {
         ProcessadorMacro pr1 = new ProcessadorMacro("D:/Biblioteca/Documentos/ProjetosJava/LC-3b_project/LC3EntradaProcMacro.txt");
         pr1.printExpanded();
         ArrayList<InstrucaoAssembler> entradaMontador1 = pr1.getEntradaMontador();
-        for(InstrucaoAssembler a : entradaMontador1)
-        {
-           System.out.println(a.getInstrucaoFULL());
-        }
-        
-        ProcessadorMacro pr2 = new ProcessadorMacro("D:/Biblioteca/Documentos/ProjetosJava/LC-3b_project/LC3EntradaProcMacro.txt");
+        System.out.println(pr1.getSaidaDef());
+        System.out.println(pr1.getSaidaExp());
+        ProcessadorMacro pr2 = new ProcessadorMacro("D:/Biblioteca/Documentos/ProjetosJava/LC-3b_project/LC3EntradaProcMacro2.txt");
         pr2.printExpanded();
         ArrayList<InstrucaoAssembler> entradaMontador2 = pr2.getEntradaMontador();
-        for(InstrucaoAssembler a : entradaMontador2)
-        {
-           System.out.println(a.getInstrucaoFULL());
-        }
+        
+        MacroDefinidaTextArea.setText( pr2.getSaidaDef() );
+        MacroExpandidaTextArea.setText( pr2.getSaidaExp() );
+        MacroDefinidaTextArea2.setText("Apenas um teste");
+        MacroExpandidaTextArea2.setText("Apenas um teste");
+        
+        /*Assembler ass1 = new Assembler(entradaMontador1);
+        Assembler ass2 = new Assembler(entradaMontador1);
+        ArrayList<EntradaLigador> entradaLigador = new ArrayList();
+        entradaLigador.add(ass1.getOutput());
+        entradaLigador.add(ass2.getOutput());
+        System.out.println(entradaLigador.get(0).getSaida().get(0).getInstrucaoFULL());
+        System.out.println(entradaLigador.get(0).getSaida().get(1).getInstrucaoFULL());*/
+        
         
         InstrucaoAssembler mod1Inst1 = new InstrucaoAssembler("label1", "LD", "R0", "X", "", "", "");
         InstrucaoAssembler mod1Inst2 = new InstrucaoAssembler("label2", "LD", "R1", "Y", "", "", "");        
@@ -406,6 +433,10 @@ public class JFrame extends javax.swing.JFrame {
         log2TextArea.setText("");
         finalMemoryTextArea.setText("");
         mem1.setText("");
+        MacroDefinidaTextArea.setText("");
+        MacroExpandidaTextArea.setText("");
+        MacroDefinidaTextArea2.setText("");
+        MacroExpandidaTextArea2.setText("");
     }//GEN-LAST:event_btnClearActionPerformed
 
     /**
@@ -449,7 +480,9 @@ public class JFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LC3bLabel;
     private javax.swing.JTextArea MacroDefinidaTextArea;
+    private javax.swing.JTextArea MacroDefinidaTextArea2;
     private javax.swing.JTextArea MacroExpandidaTextArea;
+    private javax.swing.JTextArea MacroExpandidaTextArea2;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnRun;
     private javax.swing.JLabel consoleLabel;
@@ -460,13 +493,15 @@ public class JFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelLigadorCarregador;
     private javax.swing.JPanel jPanelMaquina;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea log2TextArea;
     private javax.swing.JTextArea logTextArea;
