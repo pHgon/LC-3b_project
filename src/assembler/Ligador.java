@@ -81,7 +81,7 @@ public class Ligador {
                 else{
                     //eh label
                     Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP1()));
-                    pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
+                    //pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
                     intrucoesAssemblerGeral.get(i).setOP1(Integer.toString(pos));
                 }
             }
@@ -94,8 +94,10 @@ public class Ligador {
                 else{
                     //eh label
                     Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP2()));
-                    pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
+                    //pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
+                    intrucoesAssemblerGeral.get(i).getInstrucaoFULL();
                     intrucoesAssemblerGeral.get(i).setOP2(Integer.toString(pos));
+                    intrucoesAssemblerGeral.get(i).getInstrucaoFULL();
                 }
             }
             if(tabelaDefinicaoGlobal.get(inst.getOP3()) != null ){
@@ -107,7 +109,7 @@ public class Ligador {
                 else{
                     //eh label
                     Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP3()));
-                    pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
+                    //pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
                     intrucoesAssemblerGeral.get(i).setOP3(Integer.toString(pos));
                 }
             }
@@ -120,7 +122,7 @@ public class Ligador {
                 else{
                     //eh label
                     Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP4()));
-                    pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
+                    //pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
                     intrucoesAssemblerGeral.get(i).setOP4(Integer.toString(pos));
                 }
             }
@@ -133,7 +135,7 @@ public class Ligador {
                 else{
                     //eh label
                     Integer pos = Integer.parseInt(tabelaDefinicaoGlobal.get(inst.getOP5()));
-                    pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
+                    //pos = this.contarLinhas(intrucoesAssemblerGeral, pos);
                     intrucoesAssemblerGeral.get(i).setOP5(Integer.toString(pos));
                 }
             }

@@ -60,17 +60,17 @@ public class Run {
            System.out.println(a.getInstrucaoFULL());
         }
         System.out.println();
-        for(String a : ass1.getOutput().getTabelaDeSimbolo().keySet())
+       /* for(String a : ass1.getOutput().getTabelaDeSimbolo().keySet())
         {           
            System.out.println(a + " " + ass1.getOutput().getTabelaDeSimbolo().get(a));
-        }
+        }*/
         
         
         //  QUERIDO LORENZO, entradaLigador É O ARRAY QUE TU PEDIU, VAI LÁ!!!!
         
         Ligador ligador = new Ligador();
         EntradaCarregador entradaCarregador = ligador.liga(entradaLigador);
-        System.out.println(entradaCarregador.getGlobaTable());
+        //System.out.println(entradaCarregador.getGlobaTable());
         System.out.println(entradaCarregador.getSAIDAO());
         
         
@@ -79,8 +79,8 @@ public class Run {
            System.out.println(a + " " + entradaCarregador.getTabelaDeDefinicoesGlobal().get(a));
         }*/
         
-        Carregador carregador = new Carregador(entradaCarregador);
-        carregador.carrega("file.bin");
+       /* Carregador carregador = new Carregador(entradaCarregador);
+        carregador.carrega("file.bin");*
         
 
         String arquivo = "file.bin";
@@ -107,7 +107,7 @@ public class Run {
         }        
                 
         System.out.println("PC: " + pc);
-        System.out.println(proc);
+        System.out.println(proc);*/
 
    }
 }
