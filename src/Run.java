@@ -34,7 +34,11 @@ public class Run {
         }*/
         
         ProcessadorMacro pr2 = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro2.txt");
+        //pr1.printExpanded();
+        System.out.println(pr1.getSaidaDef());
+        System.out.println(pr1.getSaidaExp());
         //pr2.printExpanded();
+
         ArrayList<InstrucaoAssembler> entradaMontador2 = pr2.getEntradaMontador();
         /*for(InstrucaoAssembler a : entradaMontador2)
         {
