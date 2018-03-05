@@ -120,7 +120,7 @@ public class ProcessadorMacro {
     }
     /**
      * Função de retorno de saida
-     * @return arraylist < instrucaoAssembler>
+     * @return arraylist < instrucaoAssembler> me
      */
     public ArrayList getEntradaMontador()
     {
