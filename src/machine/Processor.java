@@ -143,10 +143,11 @@ public class Processor {
                 
         if((_n == 1 && _n == this.n) || (_z == 1 && _z == this.z) || (_p == 1 && _p == this.p)){
             buffer = this.buffer + "Offset shiftado: " + Integer.toString(offset << 1) + "\n";
+            System.out.println("Offset shiftado: " + Integer.toString(offset << 1));
             return offset << 1;
         }       
         
-        return 0;
+        return 1;
     }
     private int jmpret(Instrucao instruction, int pc){
         Tuple tuple = Break.JMPRET(instruction);

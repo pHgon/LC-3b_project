@@ -59,10 +59,10 @@ public class Run {
            System.out.println(a.getInstrucaoFULL());
         }
         System.out.println();
-        /*for(String a : ass2.getOutput().getTabelaDeSimbolo().keySet())
+        for(String a : ass1.getOutput().getTabelaDeSimbolo().keySet())
         {           
-           System.out.println(a + " " + ass2.getOutput().getTabelaDeSimbolo().get(a));
-        }*/
+           System.out.println(a + " " + ass1.getOutput().getTabelaDeSimbolo().get(a));
+        }
         
         
         //  QUERIDO LORENZO, entradaLigador É O ARRAY QUE TU PEDIU, VAI LÁ!!!!
@@ -102,6 +102,7 @@ public class Run {
         Processor proc = new Processor();
         
         while(pc >= offset && pc <= offset + lista.getNInstructions()){
+            System.out.println("PC: " + pc);
             pc += proc.executar(lista.getInstrucao(pc), mem, pc); 
         }        
                 
