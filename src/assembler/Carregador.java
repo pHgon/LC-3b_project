@@ -29,7 +29,8 @@ public class Carregador {
             PrintWriter out = new PrintWriter(arquivo);
             ArrayList<InstrucaoAssembler> saida = this.entradaCarregador.getSaida();
             String output = "";
-                        
+            String temp = "";
+            
             for(int i = 0; i < saida.size(); i++){ 
                 InstrucaoAssembler inst = saida.get(i);
                 output += inst.getOperator();
@@ -57,8 +58,10 @@ public class Carregador {
                         }                        
                         break;
                     case "0000":
-                        output += inst.getOP1();                        
-                        output += this.extend(this.removeHashtag(inst.getOP2()), 9);
+                        output += inst.getOP1();                      
+                        
+                        temp = Integer.toString(Integer.parseInt(inst.getOP2()) + this.enderecoInicial);
+                        output += this.extend(this.removeHashtag(temp), 9);
                         break;
                     case "1100":
                         output += "000";
@@ -76,7 +79,8 @@ public class Carregador {
                         if("1".equals(inst.getOP1())){
                             //jsr
                             output += "1";
-                            output += this.extend(this.removeHashtag(inst.getOP2()), 5);
+                            temp = Integer.toString(Integer.parseInt(inst.getOP2()) + this.enderecoInicial);                            
+                            output += this.extend(this.removeHashtag(temp), 11);
                         }
                         else{
                             //jrr
@@ -93,23 +97,27 @@ public class Carregador {
                     case "0010":                        
                         output += inst.getOP1();
                         output += inst.getOP2();
-                        output += this.extend(this.removeHashtag(inst.getOP3()), 6);
+                        
+                        temp = Integer.toString(Integer.parseInt(inst.getOP3()) + this.enderecoInicial);                            
+                        output += this.extend(this.removeHashtag(temp), 6);                        
                         break;      
                     case "1010":
                         output += inst.getOP1();
                         output += inst.getOP2();
-                        output += this.extend(this.removeHashtag(inst.getOP3()), 6);
+                        temp = Integer.toString(Integer.parseInt(inst.getOP3()) + this.enderecoInicial);                            
+                        output += this.extend(this.removeHashtag(temp), 6);                        
                         //offsetPC = this.ldi(instruction, pc, mem);
                         break;  
                     case "0110":
                         output += inst.getOP1();
                         output += inst.getOP2();
-                        output += this.extend(this.removeHashtag(inst.getOP3()), 6);
+                        temp = Integer.toString(Integer.parseInt(inst.getOP3()) + this.enderecoInicial);                            
+                        output += this.extend(this.removeHashtag(temp), 6);                        
                         //offsetPC = this.ldr(instruction, pc, mem);
                         break;  
                     case "1110":
-                        output += this.extend(this.removeHashtag(inst.getOP1()), 3);                             
-                        output += this.extend(this.removeHashtag(inst.getOP2()), 9);                                                                             
+                        output += this.extend(this.removeHashtag(inst.getOP1()), 3);                                                                             
+                        output += this.extend(this.removeHashtag(inst.getOP2()), 9);                        
                         //offsetPC = this.lea(instruction, pc, mem);
                         break;              
                     case "1101":
@@ -122,20 +130,23 @@ public class Carregador {
                         break; 
                     case "0011":
                         output += inst.getOP1();
-                        output += inst.getOP2();
-                        output += this.extend(this.removeHashtag(inst.getOP3()), 6);
+                        output += inst.getOP2();                        
+                        temp = Integer.toString(Integer.parseInt(inst.getOP3()) + this.enderecoInicial);                            
+                        output += this.extend(this.removeHashtag(temp), 6);                        
                         //offsetPC = this.stb(instruction, pc, mem);
                         break; 
                     case "1011":
                         output += inst.getOP1();
                         output += inst.getOP2();
-                        output += this.extend(this.removeHashtag(inst.getOP3()), 6);
+                        temp = Integer.toString(Integer.parseInt(inst.getOP3()) + this.enderecoInicial);                            
+                        output += this.extend(this.removeHashtag(temp), 6);                        
                         //offsetPC = this.sti(instruction, pc, mem);
                         break;                 
                     case "0111":
                         output += inst.getOP1();
                         output += inst.getOP2();
-                        output += this.extend(this.removeHashtag(inst.getOP3()), 6);
+                        //temp = Integer.toString(Integer.parseInt(inst.getOP3()) + this.enderecoInicial);                            
+                        output += this.extend(this.removeHashtag(inst.getOP3()), 6);                        
                         //offsetPC = this.str(instruction, pc, mem);
                         break;
                 }         
