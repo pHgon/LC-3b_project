@@ -161,7 +161,7 @@ public class Carregador {
                 //System.out.println(inst.getInstrucaoFULL() + " ??: " + output);
                 //output += "\n";                                
                 out.println(output);
-                buffer  = output + "\n";
+                buffer  += output + "\n";
                 output = "";
             }                                
             out.close();
