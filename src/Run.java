@@ -51,6 +51,7 @@ public class Run {
         Assembler ass2 = new Assembler(entradaMontador2);
         //System.out.println(ass2.geTableSymb());
         ArrayList<EntradaLigador> entradaLigador = new ArrayList();
+        
         entradaLigador.add(ass1.getOutput());
         entradaLigador.add(ass2.getOutput());                
                 
