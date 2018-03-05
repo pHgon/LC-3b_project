@@ -177,6 +177,17 @@ public class Assembler {
         
     }
     
+    public String geTableSymb()
+    {
+        String saida = "";
+        for(Map.Entry<String, String> a : symTable.entrySet())
+        {
+            saida =  saida + "|" +a.getKey() + "\t|"+ "\t" + a.getValue() + "\t|\n";
+        }
+        return saida;
+    }
+    
+    
     public EntradaLigador getOutput(){
         this.linkdate.setSaida(this.instList);
         this.linkdate.setTabelaDeSimbolo(this.symTable);
