@@ -23,6 +23,22 @@ public class EntradaCarregador {
     public ArrayList <InstrucaoAssembler> getSaida() {
         return saida;
     }
+    
+    /** 
+     * retorna buffer contendo Tabela de simby global
+     * 
+     * @return 
+     */
+    public String getGlobaTable()
+    {
+        String buffer = "";
+        for(Map.Entry<String,String> a : tabelaDeDefinicoesGlobal.entrySet())
+        {        
+          buffer =  buffer + "\t" +a.getKey() + "\t|"+ "\t" + a.getValue() + "\t|\n";  
+        }
+        
+        return buffer;
+    }
 
     /**
      * @param saida the saida to set
