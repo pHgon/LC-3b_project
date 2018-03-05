@@ -55,12 +55,12 @@ public class Run {
         entradaLigador.add(ass1.getOutput());
         entradaLigador.add(ass2.getOutput());                
                 
-        /*for(String a : ass1.getOutput().getTabelaDeSimbolo().keySet())
+        for(InstrucaoAssembler a : ass1.getOutput().getSaida())
         {           
-           System.out.println(a + " " + ass1.getOutput().getTabelaDeSimbolo().get(a));
+           System.out.println(a.getInstrucaoFULL());
         }
         System.out.println();
-        for(String a : ass2.getOutput().getTabelaDeSimbolo().keySet())
+        /*for(String a : ass2.getOutput().getTabelaDeSimbolo().keySet())
         {           
            System.out.println(a + " " + ass2.getOutput().getTabelaDeSimbolo().get(a));
         }*/

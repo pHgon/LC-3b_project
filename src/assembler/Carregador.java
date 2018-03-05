@@ -63,6 +63,7 @@ public class Carregador {
                         output += inst.getOP1();                      
                         
                         temp = Integer.toString(Integer.parseInt(inst.getOP2()) + this.enderecoInicial);
+                        System.out.println("BRANCH: " + temp);
                         output += this.extend(this.removeHashtag(temp), 9);
                         break;
                     case "1100":

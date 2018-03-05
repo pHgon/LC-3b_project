@@ -142,16 +142,31 @@ public class Assembler {
                 if(line[1].equals("0000")){
                     switch(line[2].charAt(1)){
                         case '0':
-                            this.instList.add(new InstrucaoAssembler(line[0], line[1], "100", line[3], "", "", ""));
+                            this.instList.add(new InstrucaoAssembler(line[0], line[1], "000", line[3], "", "", ""));
                             break;
                         case '1':
-                            this.instList.add(new InstrucaoAssembler(line[0], line[1], "010", line[3], "", "", ""));
-                            break;
-                        case '2':
                             this.instList.add(new InstrucaoAssembler(line[0], line[1], "001", line[3], "", "", ""));
                             break;
-                        default:
+                        case '2':
+                            this.instList.add(new InstrucaoAssembler(line[0], line[1], "010", line[3], "", "", ""));
+                            break;
+                        case '3':
+                            this.instList.add(new InstrucaoAssembler(line[0], line[1], "011", line[3], "", "", ""));
+                            break;
+                        case '4':
+                            this.instList.add(new InstrucaoAssembler(line[0], line[1], "100", line[3], "", "", ""));
+                            break;
+                        case '5':
+                            this.instList.add(new InstrucaoAssembler(line[0], line[1], "101", line[3], "", "", ""));
+                            break;
+                        case '6':
+                            this.instList.add(new InstrucaoAssembler(line[0], line[1], "110", line[3], "", "", ""));
+                            break;
+                        case '7':
                             this.instList.add(new InstrucaoAssembler(line[0], line[1], "111", line[3], "", "", ""));
+                            break;
+                        default:
+                            this.instList.add(new InstrucaoAssembler(line[0], line[1], "000", line[3], "", "", ""));
                             break;
                     }
                 }
