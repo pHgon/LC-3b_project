@@ -14,9 +14,8 @@ public class ProgramList {
     private ArrayList <Instrucao> programa;
     private int offset;
     
-    public ProgramList (int offset) 
-    {
-        this.offset = offset;
+    public ProgramList () 
+    {        
         this.programa = new ArrayList<>();                
     }
     
@@ -29,17 +28,17 @@ public class ProgramList {
         try(BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
             String linha = br.readLine();
             while(linha != null)
-            {                ;
+            {                
                 if(i != 0)
                 {
                     opcode = linha.substring(0, 4);
                     bits12 = linha.substring(4,16);
-                    Instrucao atual = new Instrucao(opcode,bits12,offset+i);
+                    Instrucao atual = new Instrucao(opcode,bits12,getOffset()+i);
                     programa.add(atual);
                     i+=1;                    
                 }else
                 {
-                    this.offset = Integer.parseInt(linha,2);
+                    this.setOffset(Integer.parseInt(linha,2));
                     i+=1;
                 }
                 linha = br.readLine();
@@ -75,5 +74,19 @@ public class ProgramList {
  
     public int getNInstructions (){
             return this.programa.size();
+    }
+
+    /**
+     * @return the offset
+     */
+    public int getOffset() {
+        return offset;
+    }
+
+    /**
+     * @param offset the offset to set
+     */
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 }

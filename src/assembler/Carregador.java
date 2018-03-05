@@ -28,7 +28,9 @@ public class Carregador {
         try {
             PrintWriter out = new PrintWriter(arquivo);
             ArrayList<InstrucaoAssembler> saida = this.entradaCarregador.getSaida();
-            String output = "";
+            String output = this.extend(this.stringToBin(Integer.toString(this.enderecoInicial)), 16);
+            out.println(output);                
+            output = "";
             String temp = "";
             
             for(int i = 0; i < saida.size(); i++){ 
@@ -151,7 +153,7 @@ public class Carregador {
                         break;
                 }         
                 //System.out.println(output);                
-                System.out.println(inst.getInstrucaoFULL() + " ??: " + output);
+                //System.out.println(inst.getInstrucaoFULL() + " ??: " + output);
                 //output += "\n";                                
                 out.println(output);                
                 output = "";
@@ -197,12 +199,12 @@ public class Carregador {
             return result.substring(result.length() - number);
         }
         
-        System.out.println("Size velus: " + value.length() + " - " + number);        
+        //System.out.println("Size velus: " + value.length() + " - " + number);        
                 
         for (int i = value.length(); i < number; i++) {
             result =  "0" + result;
         }
-        System.out.println(value + "- Result: " + result);        
+        //System.out.println(value + "- Result: " + result);        
 
         return result;
     }
