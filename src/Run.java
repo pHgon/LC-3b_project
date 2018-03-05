@@ -25,15 +25,15 @@ public class Run {
     {
     
         // chama duas vezes o processador de macros, uma para cada modulo e retorna entrada para MONTADOR
-        ProcessadorMacro pr1 = new ProcessadorMacro("../LC3EntradaProcMacro.txt");
-        //pr1.printExpanded();
+        ProcessadorMacro pr1 = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro.txt");
+        pr1.printExpanded();
         ArrayList<InstrucaoAssembler> entradaMontador1 = pr1.getEntradaMontador();
         /*for(InstrucaoAssembler a : entradaMontador1)
         {
            System.out.println(a.getInstrucaoFULL());
         }*/
         
-        ProcessadorMacro pr2 = new ProcessadorMacro("../LC3EntradaProcMacro2.txt");
+        ProcessadorMacro pr2 = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro2.txt");
         //pr1.printExpanded();
         //System.out.println(pr1.getSaidaDef());
         //System.out.println(pr1.getSaidaExp());
@@ -71,7 +71,7 @@ public class Run {
         Ligador ligador = new Ligador();
         EntradaCarregador entradaCarregador = ligador.liga(entradaLigador);
         //System.out.println(entradaCarregador.getGlobaTable());
-        System.out.println(entradaCarregador.getSAIDAO());
+        //System.out.println(entradaCarregador.getSAIDAO());
         
         
         /*for(String a : entradaCarregador.getTabelaDeDefinicoesGlobal().keySet())
@@ -79,8 +79,8 @@ public class Run {
            System.out.println(a + " " + entradaCarregador.getTabelaDeDefinicoesGlobal().get(a));
         }*/
         
-       /* Carregador carregador = new Carregador(entradaCarregador);
-        carregador.carrega("file.bin");*
+        Carregador carregador = new Carregador(entradaCarregador);
+        carregador.carrega("file.bin");
         
 
         String arquivo = "file.bin";
@@ -103,11 +103,15 @@ public class Run {
         
         while(pc >= offset && pc <= offset + lista.getNInstructions()){
             System.out.println("PC: " + pc);
-            pc += proc.executar(lista.getInstrucao(pc), mem, pc); 
+            System.out.println(lista.getInstrucao(pc).toString());
+            pc += proc.executar(lista.getInstrucao(pc), mem, pc);
+            //System.out.println(proc);
+            
+            
         }        
                 
         System.out.println("PC: " + pc);
-        System.out.println(proc);*/
+        System.out.println(proc);
 
    }
 }

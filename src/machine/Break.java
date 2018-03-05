@@ -40,7 +40,7 @@ public final class Break {
         int n, z, p, offset;
         n = Integer.parseInt(bits12.substring(0, 1), 2);
         z = Integer.parseInt(bits12.substring(1, 2), 2);
-        p = Integer.parseInt(bits12.substring(3, 4), 2);
+        p = Integer.parseInt(bits12.substring(2, 3), 2);
         offset = Integer.parseInt(bits12.substring(4, 12), 2);
                 
         System.out.println("n: " + (n));
@@ -48,7 +48,10 @@ public final class Break {
         System.out.println("p: " + (p));
         System.out.println("offset: " + (offset));        
         
-        return new Tuple(n, z, p, offset, 0);
+        Tuple tuple = new Tuple(n, z, p, offset, 0);
+        int borg = tuple.getT3();
+        System.out.println("BORG " + bits12.substring(3));
+        return tuple;
     }
     public static Tuple JMPRET(Instrucao instruction){
         int baseR = Integer.parseInt(instruction.getBits12().substring(3, 6), 2);        
