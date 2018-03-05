@@ -34,20 +34,41 @@ public class Run {
         //pr2.printExpanded();
 
         ArrayList<InstrucaoAssembler> entradaMontador2 = pr2.getEntradaMontador();
-        /*for(InstrucaoAssembler a : entradaMontador2)
+        for(InstrucaoAssembler a : entradaMontador2)
         {
            System.out.println(a.getInstrucaoFULL());
-        }*/
+        }
         
         
         Assembler ass1 = new Assembler(entradaMontador1);
         Assembler ass2 = new Assembler(entradaMontador2);
         ArrayList<EntradaLigador> entradaLigador = new ArrayList();
         entradaLigador.add(ass1.getOutput());
-        entradaLigador.add(ass2.getOutput());
+        entradaLigador.add(ass2.getOutput());                
+                
+        for(String a : ass1.getOutput().getTabelaDeSimbolo().keySet())
+        {           
+           System.out.println(a + " " + ass1.getOutput().getTabelaDeSimbolo().get(a));
+        }
+        System.out.println();
+        for(String a : ass2.getOutput().getTabelaDeSimbolo().keySet())
+        {           
+           System.out.println(a + " " + ass2.getOutput().getTabelaDeSimbolo().get(a));
+        }
+        
         
         //  QUERIDO LORENZO, entradaLigador É O ARRAY QUE TU PEDIU, VAI LÁ!!!!
         
+        Ligador ligador = new Ligador();
+        EntradaCarregador entradaCarregador = ligador.liga(entradaLigador);
+        
+        /*for(String a : entradaCarregador.getTabelaDeDefinicoesGlobal().keySet())
+        {           
+           System.out.println(a + " " + entradaCarregador.getTabelaDeDefinicoesGlobal().get(a));
+        }*/
+        
+        Carregador carregador = new Carregador(entradaCarregador);
+        carregador.carrega("file.bin");
         
         
         /*InstrucaoAssembler mod1Inst1 = new InstrucaoAssembler("label1", "LD", "R0", "X", "", "", "");

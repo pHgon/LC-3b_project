@@ -29,6 +29,8 @@ public class Ligador {
         
         //percorre todos os modulos 
         for(int i = 0; i < entradasLigador.size(); i++){
+            entradasLigador.get(i).contarEnderecos();
+            
             //pega as instrucoes do modulo
             ArrayList<InstrucaoAssembler> saida = entradasLigador.get(i).getSaida();            
             
@@ -37,7 +39,9 @@ public class Ligador {
             
             //copia as instrucoes
             for(int j = 0; j < saida.size(); j++){
-                intrucoesAssemblerGeral.add(saida.get(j));
+                if(!"HALT".equals(saida.get(j).getOperator())){
+                    intrucoesAssemblerGeral.add(saida.get(j));
+                }
             }
             
             //percorre a tabela de simbolos e vê se existem novos simbolos e atribui o endereco correto
