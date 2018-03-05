@@ -182,7 +182,7 @@ public class Assembler {
         String saida = "";
         for(Map.Entry<String, String> a : symTable.entrySet())
         {
-            saida =  saida + "|" +a.getKey() + "\t|"+ "\t" + a.getValue() + "\t|\n";
+            saida =  saida + "\t" +a.getKey() + "\t|"+ "\t" + a.getValue() + "\t|\n";
         }
         return saida;
     }
