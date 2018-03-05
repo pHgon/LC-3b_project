@@ -28,7 +28,7 @@ public class Assembler {
         this.instList = new ArrayList();
         this.symTable = new HashMap<>();
         this.actAddress = 0;
-        this.lineAddress = 1;
+        this.lineAddress = 0;
         
         try{
             BufferedReader file = new BufferedReader(new FileReader("../LC3Monted.txt"));
@@ -60,11 +60,11 @@ public class Assembler {
         this.instList = new ArrayList();
         this.symTable = new HashMap<>();
         this.actAddress = 0;
-        this.lineAddress = 0;
+        this.lineAddress = -1;
 
         for(int i=0; i<input.size(); i++){
-            this.lineAddress += 1;
-            setModule(input.get(i).getInstrucaoFULL().split("\t"));            
+            setModule(input.get(i).getInstrucaoFULL().split("\t"));
+            this.lineAddress += 1;            
         }
             
         for(int i=0; i<instList.size(); i++){
