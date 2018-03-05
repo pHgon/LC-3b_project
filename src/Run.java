@@ -70,6 +70,9 @@ public class Run {
         
         Ligador ligador = new Ligador();
         EntradaCarregador entradaCarregador = ligador.liga(entradaLigador);
+        System.out.println(entradaCarregador.getGlobaTable());
+        System.out.println(entradaCarregador.getSAIDAO());
+        
         
         /*for(String a : entradaCarregador.getTabelaDeDefinicoesGlobal().keySet())
         {           

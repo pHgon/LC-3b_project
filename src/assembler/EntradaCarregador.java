@@ -17,10 +17,20 @@ public class EntradaCarregador {
     private Map<String, String> tabelaDeDefinicoesGlobal;        
     private Integer enderecoInicial;
     
+    
+    public  String getSAIDAO()
+    {
+        String buffer = "";
+        for(InstrucaoAssembler a : saida)
+        {
+            buffer =  buffer + a.getInstrucaoFULL() + "\n";
+        }
+        return buffer;
+    }
     /**
      * @return the saida
      */
-    public ArrayList <InstrucaoAssembler> getSaida() {
+    public ArrayList <InstrucaoAssembler> getSaida() {        
         return saida;
     }
     

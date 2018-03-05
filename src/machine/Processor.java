@@ -140,6 +140,7 @@ public class Processor {
                                         "Z: " + Integer.toString(tuple.t2) + "\n" +
                                         "P: " + Integer.toString(tuple.t3) + "\n" +
                                         "OFFSET: " + Integer.toString(tuple.t4) + "\n\n";
+                System.out.println(buffer);
                 
         if((_n == 1 && _n == this.n) || (_z == 1 && _z == this.z) || (_p == 1 && _p == this.p)){
             buffer = this.buffer + "Offset shiftado: " + Integer.toString(offset << 1) + "\n";
@@ -249,7 +250,7 @@ public class Processor {
         return 1;
     }
     private int lea(Instrucao instruction, int pc, Memory mem) {
-        Tuple tuple = Break.LEA(instruction);
+            Tuple tuple = Break.LEA(instruction);
         
         int dr;
         short offset;
@@ -359,12 +360,12 @@ public class Processor {
         return (short) Integer.parseInt(leAddress,2);
     }
     private void setNZP(short number){
-        int sign = Integer.parseInt(Integer.toBinaryString(number).substring(0,1));
+        //int sign = Integer.parseInt(Integer.toBinaryString(number).substring(0,1));
         this.n = 0;
         this.z = 0;
         this.p = 0; 
         
-        if(sign == 1){
+        if(number < 0){
             this.n = 1;
         }
         else{
