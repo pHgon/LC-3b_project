@@ -19,11 +19,13 @@ import machine.ProgramList;
 public class Carregador {
     private EntradaCarregador  entradaCarregador;
     private int enderecoInicial;
+    public String buffer;
     public Carregador(EntradaCarregador _entradaCarregador) {
         this.entradaCarregador = _entradaCarregador;
         this.enderecoInicial = this.entradaCarregador.getEnderecoInicial();
+        this.buffer = "";
     }
-
+    
     public void carrega(String arquivo) {
         try {
             PrintWriter out = new PrintWriter(arquivo);
@@ -158,7 +160,8 @@ public class Carregador {
                 //System.out.println(output);                
                 //System.out.println(inst.getInstrucaoFULL() + " ??: " + output);
                 //output += "\n";                                
-                out.println(output);                
+                out.println(output);
+                buffer  = output + "\n";
                 output = "";
             }                                
             out.close();
@@ -166,7 +169,14 @@ public class Carregador {
             Logger.getLogger(Carregador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * retorna buffer FILEBIN
+     * @return 
+     */
+    public String getBuffer()
+    {
+        return buffer;
+    }
     /**
      * @return the entradaCarregador
      */

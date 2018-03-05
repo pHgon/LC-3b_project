@@ -105,7 +105,7 @@ public class Run {
             System.out.println("PC: " + pc);
             System.out.println(lista.getInstrucao(pc).toString());
             pc += proc.executar(lista.getInstrucao(pc), mem, pc);
-            //System.out.println(proc);
+            System.out.println(proc);
             
             
         }        
