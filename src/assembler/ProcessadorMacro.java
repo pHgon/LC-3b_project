@@ -85,6 +85,18 @@ public class ProcessadorMacro {
                             saida.add(expndedMacro); 
                         }                                                        
                        break;
+                    default:
+                            String[] copia = new String[5];
+                            String[] splitOut = linha.split("\\t");
+                            for(int i = 0; i<copia.length; i++) copia[i] = "";
+                                  
+                             for(int i  = 0 ; i<splitOut.length; i++)
+                            {
+                                copia[i] = splitOut[i];
+                            }
+                            InstrucaoAssembler expndedMacro = new InstrucaoAssembler(copia[0],copia[1],copia[2],copia[3],copia[4], "", "");
+                            saida.add(expndedMacro);
+                        break;
                 }
                 linha = br.readLine();
                 if(linha != null) macroDef = macroDef + linha + "\n";
