@@ -25,26 +25,34 @@ public class Run {
     {
     
         // chama duas vezes o processador de macros, uma para cada modulo e retorna entrada para MONTADOR
-        ProcessadorMacro pr1 = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro.txt");
+        ProcessadorMacro pr1 = new ProcessadorMacro("../LC3EntradaProcMacro.txt");
         //pr1.printExpanded();
         ArrayList<InstrucaoAssembler> entradaMontador1 = pr1.getEntradaMontador();
-        System.out.println(pr1.getSaidaDef());
-        System.out.println(pr1.getSaidaExp());
-        ProcessadorMacro pr2 = new ProcessadorMacro("/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/LC3EntradaProcMacro2.txt");
+        /*for(InstrucaoAssembler a : entradaMontador1)
+        {
+           System.out.println(a.getInstrucaoFULL());
+        }*/
+        
+        ProcessadorMacro pr2 = new ProcessadorMacro("../LC3EntradaProcMacro.txt");
         //pr2.printExpanded();
         ArrayList<InstrucaoAssembler> entradaMontador2 = pr2.getEntradaMontador();
-        System.out.println(pr2.getSaidaDef());
-        System.out.println(pr2.getSaidaExp());
-        /*Assembler ass1 = new Assembler(entradaMontador1);
-        Assembler ass2 = new Assembler(entradaMontador1);
+        /*for(InstrucaoAssembler a : entradaMontador2)
+        {
+           System.out.println(a.getInstrucaoFULL());
+        }*/
+        
+        
+        Assembler ass1 = new Assembler(entradaMontador1);
+        Assembler ass2 = new Assembler(entradaMontador2);
         ArrayList<EntradaLigador> entradaLigador = new ArrayList();
         entradaLigador.add(ass1.getOutput());
         entradaLigador.add(ass2.getOutput());
-        System.out.println(entradaLigador.get(0).getSaida().get(0).getInstrucaoFULL());
-        System.out.println(entradaLigador.get(0).getSaida().get(1).getInstrucaoFULL());*/
+        
+        //  QUERIDO LORENZO, entradaLigador É O ARRAY QUE TU PEDIU, VAI LÁ!!!!
         
         
-        InstrucaoAssembler mod1Inst1 = new InstrucaoAssembler("label1", "LD", "R0", "X", "", "", "");
+        
+        /*InstrucaoAssembler mod1Inst1 = new InstrucaoAssembler("label1", "LD", "R0", "X", "", "", "");
         InstrucaoAssembler mod1Inst2 = new InstrucaoAssembler("label2", "LD", "R1", "Y", "", "", "");        
         
         InstrucaoAssembler mod2Inst1 = new InstrucaoAssembler("label3", "NOT", "R2", "R1", "", "", "");
@@ -94,7 +102,7 @@ public class Run {
         
         Carregador carregador = new Carregador(entradaCarregador);
         carregador.carrega("file.bin");
-        //ProgramList lista = new ProgramList(carregador.getEntradaCarregador().getEnderecoInicial());
+        //ProgramList lista = new ProgramList(carregador.getEntradaCarregador().getEnderecoInicial());*/
         
         /*String arquivo = "/home/mateus/Área de Trabalho/semestre/ps/PSGIT/LC-3b_project/program.bin";
         int offset = 500, pc; // definido pelo carregador

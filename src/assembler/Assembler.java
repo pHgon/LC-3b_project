@@ -21,6 +21,7 @@ public class Assembler {
     private Map<String, String> symTable;
     private Integer actAddress;
     
+    
     public Assembler(){
         this.linkdate = new EntradaLigador();
         this.instList = new ArrayList();
@@ -52,11 +53,26 @@ public class Assembler {
         }
     }
     
-    public Assembler(ArrayList <InstrucaoAssembler> input){
+    public Assembler(ArrayList<InstrucaoAssembler> input){
+        this.linkdate = new EntradaLigador();
+        this.instList = new ArrayList();
+        this.symTable = new HashMap<>();
+        this.actAddress = 0;
+        
         for(int i=0; i<input.size(); i++){
-            System.out.println(input.get(i).getInstrucaoFULL());
+            setModule(input.get(i).getInstrucaoFULL().split("\t"));
         }
+            
+        /*for(int i=0; i<instList.size(); i++){
+            System.out.println(instList.get(i).getInstrucaoFULL());
+        }
+        System.out.println();
+        for(Map.Entry<String, String> entry : this.symTable.entrySet()){
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+        System.out.println();*/
     }
+    
     
     private void setModule(String[] line){
         if(line[0].equals(".ORIG")){
@@ -82,7 +98,6 @@ public class Assembler {
                 return;
             }
         }
-        
         
         for(Map.Entry<String, String> entry : c.instructions.entrySet()){
             if(line[1].equals(entry.getKey())){
@@ -124,18 +139,42 @@ public class Assembler {
                 this.actAddress+=1;
                 break;
             case 4:
-                this.instList.add(new InstrucaoAssembler(line[0], line[1], line[2], line[3], "", "", ""));
+                if(line[1].equals("0000")){
+                    switch(line[2].charAt(1)){
+                        case '0':
+                            this.instList.add(new InstrucaoAssembler(line[0], line[1], "100", line[3], "", "", ""));
+                            break;
+                        case '1':
+                            this.instList.add(new InstrucaoAssembler(line[0], line[1], "010", line[3], "", "", ""));
+                            break;
+                        case '2':
+                            this.instList.add(new InstrucaoAssembler(line[0], line[1], "001", line[3], "", "", ""));
+                            break;
+                        default:
+                            this.instList.add(new InstrucaoAssembler(line[0], line[1], "111", line[3], "", "", ""));
+                            break;
+                    }
+                }
+                else{
+                    this.instList.add(new InstrucaoAssembler(line[0], line[1], line[2], line[3], "", "", ""));
+                }
                 this.actAddress+=2;
                 break;
             default:
-                this.instList.add(new InstrucaoAssembler(line[0], line[1], line[2], line[3], line[4], "", ""));
+                if(line[1].equals("0001") || line[1].equals("0101")){ // ADD ou AND
+                    if(line[4].charAt(0) == '#'){
+                        this.instList.add(new InstrucaoAssembler(line[0], line[1], line[2], line[3], "1", line[4], ""));
+                    }
+                    else{
+                        this.instList.add(new InstrucaoAssembler(line[0], line[1], line[2], line[3], "0", line[4], ""));
+                    }
+                }
+                else{
+                    this.instList.add(new InstrucaoAssembler(line[0], line[1], line[2], line[3], line[4], "", ""));
+                }
                 this.actAddress+=3;
         }
-        /*System.out.printf("%s\t", line.length);
-        for(int i=0; i<line.length; i++){
-            System.out.printf("(%d-%s) ", i, line[i]);
-        }
-        System.out.println*/
+        
     }
     
     public EntradaLigador getOutput(){
