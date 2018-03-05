@@ -19,6 +19,7 @@ public class ProcessadorMacro {
     public ArrayList <InstrucaoAssembler> saida; // Publico para uso no MONTADOR
     private ArrayList<Macro> macros;
     private String nomeArquivo;
+    public String macroDef,macroExp;
     
     /**
      * Cria Processador 
@@ -30,11 +31,14 @@ public class ProcessadorMacro {
         saida =  new ArrayList<>();
         macros = new ArrayList<>();
         this.nomeArquivo = nomeArquivo;
+        this.macroDef = "";
+        this.macroExp = "";
         
         //ler arquivo.
         try(BufferedReader br =  new BufferedReader(new FileReader(nomeArquivo)))
         {
-            String linha = br.readLine(); 
+            String linha = br.readLine();
+            macroDef = macroDef + linha + "\n";
             while(linha != null)
             {
                 String partes[] = linha.split("\\t");
@@ -53,12 +57,15 @@ public class ProcessadorMacro {
                         if(partes[1].equals("MCDEFN"))
                         {
                            linha = br.readLine(); // leio proxima linha
+                           macroDef = macroDef + linha + "\n";
                            Macro temp = DefinitionMode(linha); // entrei em definicao
                            linha  = br.readLine(); // pego proxima linha
+                           macroDef = macroDef + linha + "\n";
                            while(linha.compareTo("\tMCEND") != 0) // até o fim da macro adiciono a lista de instrucoes da macro
                             {
                                temp.addInstrucao(linha);
                                linha = br.readLine();
+                               macroDef = macroDef + linha + "\n";
                             }    
                            macros.add(temp); // defino macro
                         }else if(verifyMacroName(partes[1])) // macro ja foi definida TA NA HORA DE EXPADIRRRRR
@@ -80,6 +87,7 @@ public class ProcessadorMacro {
                        break;
                 }
                 linha = br.readLine();
+                if(linha != null) macroDef = macroDef + linha + "\n";
             
             }
             
@@ -89,6 +97,26 @@ public class ProcessadorMacro {
         }    
         
         
+    }
+    /**
+     * 
+     * @return  Retorna buffer da macro definida
+     */
+    public String getSaidaDef()
+    {
+        return this.macroDef;
+    }
+    /**
+     * 
+     * @return  Retorna saida da macro expandida.
+     */
+    public String getSaidaExp()      
+    {
+        for(InstrucaoAssembler i : saida)
+        {
+            macroExp = macroExp + i.getInstrucaoFULL() + "\n";
+        }
+        return macroExp;
     }
     /**
      * Função de retorno de saida

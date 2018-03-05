@@ -26,22 +26,16 @@ public class Run {
     
         // chama duas vezes o processador de macros, uma para cada modulo e retorna entrada para MONTADOR
         ProcessadorMacro pr1 = new ProcessadorMacro("LC3EntradaProcMacro.txt");
-        pr1.printExpanded();
+        //pr1.printExpanded();
         ArrayList<InstrucaoAssembler> entradaMontador1 = pr1.getEntradaMontador();
-        for(InstrucaoAssembler a : entradaMontador1)
-        {
-           System.out.println(a.getInstrucaoFULL());
-        }
-        
-        ProcessadorMacro pr2 = new ProcessadorMacro("LC3EntradaProcMacro.txt");
-        pr2.printExpanded();
+        System.out.println(pr1.getSaidaDef());
+        System.out.println(pr1.getSaidaExp());
+        ProcessadorMacro pr2 = new ProcessadorMacro("LC3EntradaProcMacro2.txt");
+        //pr2.printExpanded();
+
         ArrayList<InstrucaoAssembler> entradaMontador2 = pr2.getEntradaMontador();
-        for(InstrucaoAssembler a : entradaMontador2)
-        {
-           System.out.println(a.getInstrucaoFULL());
-        }
-        
-        
+        System.out.println(pr2.getSaidaDef());
+        System.out.println(pr2.getSaidaExp());
         /*Assembler ass1 = new Assembler(entradaMontador1);
         Assembler ass2 = new Assembler(entradaMontador1);
         ArrayList<EntradaLigador> entradaLigador = new ArrayList();
