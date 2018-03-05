@@ -20,6 +20,7 @@ public class Assembler {
     private ArrayList <InstrucaoAssembler> instList;
     private Map<String, String> symTable;
     private Integer actAddress;
+    private Integer lineAddress;
     
     
     public Assembler(){
@@ -27,6 +28,7 @@ public class Assembler {
         this.instList = new ArrayList();
         this.symTable = new HashMap<>();
         this.actAddress = 0;
+        this.lineAddress = 0;
         
         try{
             BufferedReader file = new BufferedReader(new FileReader("../LC3Monted.txt"));
@@ -58,9 +60,11 @@ public class Assembler {
         this.instList = new ArrayList();
         this.symTable = new HashMap<>();
         this.actAddress = 0;
-        
+        this.lineAddress = 0;
+
         for(int i=0; i<input.size(); i++){
-            setModule(input.get(i).getInstrucaoFULL().split("\t"));
+            this.lineAddress += 1;
+            setModule(input.get(i).getInstrucaoFULL().split("\t"));            
         }
             
         /*for(int i=0; i<instList.size(); i++){
@@ -85,7 +89,9 @@ public class Assembler {
         }
         
         if(!line[0].equals("")){
-            this.symTable.put(line[0], Integer.toString(this.actAddress));
+            //System.out.println("LABEL: " + line[0] + " - " + Integer.toString(this.lineAddress));
+            //this.symTable.put(line[0], Integer.toString(this.actAddress));
+            this.symTable.put(line[0], Integer.toString(this.lineAddress));
         }
         
         if(line.length>2){
